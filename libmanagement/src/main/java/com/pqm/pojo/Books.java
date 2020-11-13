@@ -10,5 +10,9 @@ package com.pqm.pojo;
  * @author pminh
  */
 public class Books {
-    
+    private int id;
+    private String name;
+    private String author;
+    private String describe;
+    private String publisher;
 }
