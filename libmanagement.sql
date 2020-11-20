@@ -26,7 +26,7 @@ CREATE TABLE `authors` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `authors` (
 
 LOCK TABLES `authors` WRITE;
 /*!40000 ALTER TABLE `authors` DISABLE KEYS */;
+INSERT INTO `authors` VALUES (2,'Tô Oai Hùng');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,14 +50,18 @@ CREATE TABLE `books` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `category_id` int NOT NULL,
-  `author_id` int DEFAULT NULL,
-  `publisher` varchar(45) NOT NULL,
-  `publish_year` varchar(45) DEFAULT NULL,
+  `author_id` int NOT NULL,
+  `publisher_id` int NOT NULL,
+  `publish_year` int DEFAULT NULL,
   `describe` longtext,
   PRIMARY KEY (`id`),
-  CONSTRAINT `author_id` FOREIGN KEY (`id`) REFERENCES `authors` (`id`),
-  CONSTRAINT `category_id` FOREIGN KEY (`id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_authors_idx` (`author_id`),
+  KEY `fk_publiser_idx` (`publisher_id`),
+  KEY `fk_category_idx` (`category_id`),
+  CONSTRAINT `fk_authors` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`),
+  CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
+  CONSTRAINT `fk_publiser` FOREIGN KEY (`publisher_id`) REFERENCES `publisher` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +70,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
+INSERT INTO `books` VALUES (7,'Kiến trúc máy tính',5,2,2,2002,'Tài liệu học tập môn kiến trúc máy tính.');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +113,7 @@ CREATE TABLE `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +122,32 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (5,'Tài liệu');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `publisher`
+--
+
+DROP TABLE IF EXISTS `publisher`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `publisher` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `publisher`
+--
+
+LOCK TABLES `publisher` WRITE;
+/*!40000 ALTER TABLE `publisher` DISABLE KEYS */;
+INSERT INTO `publisher` VALUES (2,'Đại học Mở TP.Hồ Chí Minh');
+/*!40000 ALTER TABLE `publisher` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -161,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-13 12:31:25
+-- Dump completed on 2020-11-20 17:54:25
