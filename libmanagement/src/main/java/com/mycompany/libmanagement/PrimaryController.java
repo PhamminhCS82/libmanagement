@@ -3,18 +3,15 @@ package com.mycompany.libmanagement;
 import com.pqm.pojo.Books;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class PrimaryController {
+public class PrimaryController implements Initializable{
     
     @FXML
     private TableView<Books> tbBooks;
-    public void initialize(URL url, ResourceBundle rb){
-        this.loadBooks();
-    }
     private void loadBooks(){
         TableColumn clName = new TableColumn("Tên sách");
         TableColumn clPublisher = new TableColumn("Nhà xuất bản");
@@ -29,5 +26,10 @@ public class PrimaryController {
         this.tbBooks.getColumns().addAll(clYear);
         this.tbBooks.getColumns().addAll(clDescribe);
         //this.tbBooks.setItems(FXCollections.observableArrayList(""));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        loadBooks();
     }
 }
