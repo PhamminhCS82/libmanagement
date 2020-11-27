@@ -9,7 +9,8 @@ package com.pqm.pojo;
  *
  * @author pminh
  */
-public class Category {
+public class Authors {
+
     /**
      * @return the id
      */
@@ -39,13 +40,11 @@ public class Category {
     }
     private int id;
     private String name;
-    public Category(int id, String name)
-    {
+    public Authors(int id){
+        this.id = id;
+    }
+    public Authors(int id, String name){
         this.id = id;
         this.name = name;
-    }
-    public Category(int id)
-    {
-        this.id = id;
     }
 }

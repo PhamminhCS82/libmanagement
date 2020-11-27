@@ -42,14 +42,14 @@ public class Books {
     /**
      * @return the author
      */
-    public String getAuthor() {
+    public Authors getAuthor() {
         return author;
     }
 
     /**
      * @param author the author to set
      */
-    public void setAuthor(String author) {
+    public void setAuthor(Authors author) {
         this.author = author;
     }
 
@@ -70,14 +70,14 @@ public class Books {
     /**
      * @return the publisher
      */
-    public String getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
     /**
      * @param publisher the publisher to set
      */
-    public void setPublisher(String publisher) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 
@@ -98,25 +98,26 @@ public class Books {
     /**
      * @return the category
      */
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
     private int id;
     private String name;
-    private String author;
+    private Authors author;
     private String describe;
-    private String publisher;
+    private Publisher publisher;
     private int year;
-    private String category;
-    public Books(String name, String author,
-            String describe, String publisher, String category, int year){
+    private Category category;
+    public Books(int id, String name, Authors author,
+            String describe, Publisher publisher, Category category, int year){
+        this.id = id;
         this.name = name;
         this.author = author;
         this.describe = describe;
