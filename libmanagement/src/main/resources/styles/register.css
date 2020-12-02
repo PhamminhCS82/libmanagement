@@ -4,19 +4,13 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Nov 28, 2020, 5:49:13 PM
+    Created on : Dec 2, 2020, 5:35:04 PM
     Author     : Kiet Tat
 */
-
-VBox {
-    -fx-background-color: white;
+GridPane {
+    -fx-vgap: 5;
 }
 
-.userPic {
-    -fx-alignment: CENTER;
-    /*-fx-margin: 0 0 10 0;*/
-}
-
-Label {
-    -fx-padding: 5;
+TextField {
+    -fx-max-width: 480;
 }
