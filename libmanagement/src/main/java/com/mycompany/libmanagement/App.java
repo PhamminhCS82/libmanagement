@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 /**
  * JavaFX App
  */
@@ -20,6 +18,12 @@ public class App extends Application {
         scene = new Scene(loadFXML("register"), 750, 550);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        JdbcUtils.getConnection().close();
+        super.stop();
     }
 
     static void setRoot(String fxml) throws IOException {
