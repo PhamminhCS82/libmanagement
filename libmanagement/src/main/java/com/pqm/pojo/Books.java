@@ -12,6 +12,20 @@ package com.pqm.pojo;
 public class Books {
 
     /**
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
      * @return the id
      */
     public int getId() {
@@ -84,14 +98,14 @@ public class Books {
     /**
      * @return the year
      */
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
     /**
      * @param year the year to set
      */
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -114,16 +128,28 @@ public class Books {
     private String author;
     private String describe;
     private String publisher;
-    private int year;
+    private String year;
     private String category;
+    private String location;
     public Books(int id, String name, String author,
-            String describe, String publisher, String category, int year){
+            String describe, String publisher, String category,String location ,String year){
         this.id = id;
         this.name = name;
         this.author = author;
         this.describe = describe;
         this.publisher = publisher;
         this.category = category;
+        this.location = location;
+        this.year = year;
+    }
+    public Books(String name, String author,
+            String describe, String publisher, String category,String location, String year){
+        this.name = name;
+        this.author = author;
+        this.describe = describe;
+        this.publisher = publisher;
+        this.category = category;
+        this.location = location;
         this.year = year;
     }
 }

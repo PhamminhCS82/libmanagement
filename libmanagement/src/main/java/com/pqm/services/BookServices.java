@@ -13,31 +13,60 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author pminh
  */
 public class BookServices {
-    public static List<Books> getBooks() throws SQLException{
+    public static ObservableList<Books> getBooks(String kw) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
         String sql = "SELECT * FROM libmanage.books";
+        if(kw != null &&  !kw.trim().isEmpty())
+            sql += "WHERE name like ?";
         PreparedStatement stm = conn.prepareStatement(sql);
+        if (kw != null && !kw.trim().isEmpty())
+            stm.setString(1, String.format("%%%s%%", kw.trim()));
         ResultSet rs = stm.executeQuery();
-        List<Books> books = new ArrayList<>();
+        ObservableList<Books> books = FXCollections.observableArrayList();
         while(rs.next())
         {
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            int publishYear = rs.getInt("publish_year");
-            String describe = rs.getString("describe"); 
-            String auth = rs.getString("authors");
-            String publish = rs.getString("publisher");
-            String cat = rs.getString("category");
-//            String location = rs.getString("location");
-            Books b = new Books(id ,name, auth, describe, publish, cat, publishYear);
+            Books b = new Books(rs.getInt("id") ,rs.getString("name")
+                    , rs.getString("authors"), rs.getString("describe"),
+                    rs.getString("publisher"), rs.getString("category"), rs.getString("location"),rs.getString("publish_year"));
             books.add(b);
         }
         return books;
+    }
+    public static boolean addBook(Books q) { 
+        Connection conn = JdbcUtils.getConnection();
+        try {
+            
+            conn.setAutoCommit(false);
+            String sql = "INSERT INTO books(name, describe, publisher, authors, location, category, publish_year)"
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, q.getName());
+            stm.setString(2, q.getDescribe());
+            stm.setString(3, q.getPublisher());
+            stm.setString(4, q.getAuthor());
+            stm.setString(5, q.getLocation());
+            stm.setString(6, q.getCategory());
+            stm.setString(7, q.getYear());
+            conn.commit();
+            
+            return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }        
+        return false;
     }
 }
