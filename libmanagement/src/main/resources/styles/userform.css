@@ -1,0 +1,15 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    
+}
+
+GridPane {
+    -fx-vgap: 5;
+}
+
+TextField {
+    -fx-max-width: 480;
+}
