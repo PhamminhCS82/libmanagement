@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -23,21 +21,31 @@ import javafx.collections.ObservableList;
  * @author pminh
  */
 public class BookServices {
-    public static ObservableList<Books> getBooks(String kw) throws SQLException{
+    public static ObservableList<Books> getBooks(String kw, int indexCat) throws SQLException{
         Connection conn = JdbcUtils.getConnection();
         String sql = "SELECT * FROM libmanage.books";
-        if(kw != null &&  !kw.trim().isEmpty())
-            sql += "WHERE name like ?";
+        if(kw != null && !kw.trim().isEmpty())
+        {
+            ComboCat d = ComboCat.getValueByIndex(indexCat);
+            if(d != null)
+                sql += " WHERE " + d + " like ?";
+            else
+                sql += " WHERE name like ?";
+            
+        }
         PreparedStatement stm = conn.prepareStatement(sql);
         if (kw != null && !kw.trim().isEmpty())
+        {
             stm.setString(1, String.format("%%%s%%", kw.trim()));
+        }
         ResultSet rs = stm.executeQuery();
         ObservableList<Books> books = FXCollections.observableArrayList();
         while(rs.next())
         {
             Books b = new Books(rs.getInt("id") ,rs.getString("name")
-                    , rs.getString("authors"), rs.getString("describe"),
-                    rs.getString("publisher"), rs.getString("category"), rs.getString("location"),rs.getString("publish_year"));
+                    , rs.getString("authors"), rs.getString("describe")
+                    , rs.getString("publisher"), rs.getString("category")
+                    , rs.getString("location"),rs.getString("publish_year"));
             books.add(b);
         }
         return books;
@@ -47,8 +55,8 @@ public class BookServices {
         try {
             
             conn.setAutoCommit(false);
-            String sql = "INSERT INTO books(name, describe, publisher, authors, location, category, publish_year)"
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO books(name, books.describe, publisher, authors, location, category, publish_year)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, q.getName());
             stm.setString(2, q.getDescribe());
@@ -68,5 +76,22 @@ public class BookServices {
             }
         }        
         return false;
+    }
+    enum ComboCat{
+        name(0), authors(1), publisher(2), category(3);
+        private final int index;
+        ComboCat(int index){
+            this.index = index;
+        }
+        public int getIndex(){
+            return this.index;
+        }
+        public static ComboCat getValueByIndex(int index){
+            for(ComboCat d: ComboCat.values()){
+                if(d.index == index)
+                    return d;
+            }
+            return null;
+        }
     }
 }
