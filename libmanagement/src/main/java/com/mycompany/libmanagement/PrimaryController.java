@@ -37,21 +37,22 @@ public class PrimaryController implements Initializable{
         clPublisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         
         TableColumn clAuthor = new TableColumn("Tác giả");
-        clAuthor.setCellValueFactory(new PropertyValueFactory<>("authors"));
+        clAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         
         TableColumn clCategory = new TableColumn("Thể loại");
         clCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         
         TableColumn clYear = new TableColumn("Năm xuất bản");
-        clYear.setCellValueFactory(new PropertyValueFactory<>("publish_year"));
+        clYear.setCellValueFactory(new PropertyValueFactory<>("year"));
         
         TableColumn clLocation = new TableColumn("Vị trí");
         clLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         
         TableColumn clDescribe = new TableColumn("Thông tin");
         clDescribe.setCellValueFactory(new PropertyValueFactory<>("describe"));
+        
         tbBooks.getColumns().addAll(clId,clName,clPublisher
-                ,clAuthor,clCategory,clCategory,clYear,clDescribe, clLocation);
+                ,clAuthor,clCategory,clYear,clDescribe, clLocation);
     }
     
     private void loadData(String kw) throws SQLException{
