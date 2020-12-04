@@ -16,11 +16,11 @@ import java.util.logging.Logger;
 //@author pminh 
 public class JdbcUtils {
     private static Connection conn;
-    private static String user = "root", password = "9875428Minh"; //sua lai user va password de phu hop voi MySQL tren may 
+    private static final String user = "root", password = "9875428Minh"; //sua lai user va password de phu hop voi MySQL tren may 
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("mysql:jdbc://localhost/libmanage", user, password);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/libmanage", user, password);
         } catch (ClassNotFoundException|SQLException ex) {
             Logger.getLogger(JdbcUtils.class.getName()).log(Level.SEVERE, null, ex);
         }

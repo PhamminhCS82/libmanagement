@@ -12,6 +12,20 @@ package com.pqm.pojo;
 public class Books {
 
     /**
+     * @return the location
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
      * @return the id
      */
     public int getId() {
@@ -42,14 +56,14 @@ public class Books {
     /**
      * @return the author
      */
-    public Authors getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
     /**
      * @param author the author to set
      */
-    public void setAuthor(Authors author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -70,59 +84,72 @@ public class Books {
     /**
      * @return the publisher
      */
-    public Publisher getPublisher() {
+    public String getPublisher() {
         return publisher;
     }
 
     /**
      * @param publisher the publisher to set
      */
-    public void setPublisher(Publisher publisher) {
+    public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 
     /**
      * @return the year
      */
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
     /**
      * @param year the year to set
      */
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
     /**
      * @return the category
      */
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
     /**
      * @param category the category to set
      */
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
+
     private int id;
     private String name;
-    private Authors author;
+    private String author;
     private String describe;
-    private Publisher publisher;
-    private int year;
-    private Category category;
-    public Books(int id, String name, Authors author,
-            String describe, Publisher publisher, Category category, int year){
+    private String publisher;
+    private String year;
+    private String category;
+    private String location;
+    public Books(int id, String name, String author,
+            String describe, String publisher, String category,String location ,String year){
         this.id = id;
         this.name = name;
         this.author = author;
         this.describe = describe;
         this.publisher = publisher;
         this.category = category;
+        this.location = location;
+        this.year = year;
+    }
+    public Books(String name, String author,
+            String describe, String publisher, String category,String location, String year){
+        this.name = name;
+        this.author = author;
+        this.describe = describe;
+        this.publisher = publisher;
+        this.category = category;
+        this.location = location;
         this.year = year;
     }
 }
