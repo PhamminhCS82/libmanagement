@@ -51,7 +51,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#addBooksHandler" text="Thêm sách" />
-            <Button mnemonicParsing="false" text="Xóa" />
+            <Button mnemonicParsing="false" onAction="#clearTextHandler" text="Đặt lại" />
          </children>
       </HBox>
    </bottom>

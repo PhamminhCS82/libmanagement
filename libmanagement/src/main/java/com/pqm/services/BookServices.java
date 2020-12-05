@@ -65,6 +65,7 @@ public class BookServices {
             stm.setString(5, q.getLocation());
             stm.setString(6, q.getCategory());
             stm.setString(7, q.getYear());
+            stm.executeUpdate();
             conn.commit();
             
             return true;
@@ -76,6 +77,16 @@ public class BookServices {
             }
         }        
         return false;
+    }
+    public static boolean deleteBook(int bookId) throws SQLException {
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "DELETE FROM books WHERE id=?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, bookId);
+        
+        int kq = stm.executeUpdate();
+        
+        return kq > 0;
     }
     enum ComboCat{
         name(0), authors(1), publisher(2), category(3);
