@@ -22,6 +22,7 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="167.1999938964844" minHeight="10.0" prefHeight="63.000006103515624" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="167.1999938964844" minHeight="10.0" prefHeight="63.000006103515624" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="181.60000610351562" minHeight="10.0" prefHeight="35.79999389648439" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="245.60001220703128" minHeight="10.0" prefHeight="66.40000610351561" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="302.00000610351566" minHeight="10.0" prefHeight="58.399993896484375" vgrow="SOMETIMES" />
@@ -30,20 +31,22 @@
             <RowConstraints maxHeight="389.4" minHeight="10.0" prefHeight="186.9999816894532" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Tác giả" GridPane.rowIndex="1" />
-            <TextField fx:id="txtAuthors" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtCategory" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Thể loại" GridPane.rowIndex="2" />
-            <TextField fx:id="txtName" GridPane.columnIndex="1" />
-            <TextField fx:id="txtPublisher" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtPublishYear" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="txtLocation" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Nhà xuất bản" GridPane.rowIndex="3" />
-            <Label text="Năm xuất bản" GridPane.rowIndex="4" />
-            <Label text="Vị trí" GridPane.rowIndex="5" />
-            <Label prefHeight="18.0" prefWidth="76.0" text="Tên Sách" />
-            <TextArea fx:id="txtDescribe" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="Mô tả nội dung" GridPane.rowIndex="6" />
+            <Label text="Tác giả" GridPane.rowIndex="2" />
+            <TextField fx:id="txtAuthors" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtCategory" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Thể loại" GridPane.rowIndex="3" />
+            <TextField fx:id="txtName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtPublisher" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtPublishYear" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="txtLocation" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Nhà xuất bản" GridPane.rowIndex="4" />
+            <Label text="Năm xuất bản" GridPane.rowIndex="5" />
+            <Label text="Vị trí" GridPane.rowIndex="6" />
+            <Label prefHeight="18.0" prefWidth="76.0" text="Tên Sách" GridPane.rowIndex="1" />
+            <TextArea fx:id="txtDescribe" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="Mô tả nội dung" GridPane.rowIndex="7" />
+            <Label text="Ngày nhập" />
+            <Label fx:id="lbDate" prefHeight="27.0" prefWidth="226.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </left>

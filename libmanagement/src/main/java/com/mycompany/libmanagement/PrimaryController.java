@@ -1,6 +1,6 @@
 package com.mycompany.libmanagement;
 
-import com.pqm.pojo.Books;
+import com.pqm.pojo.Book;
 import com.pqm.services.BookServices;
 import java.net.URL;
 import java.sql.SQLException;
@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -26,7 +27,7 @@ import javafx.scene.input.KeyCode;
 
 public class PrimaryController implements Initializable{
     @FXML TextField txtName;
-    @FXML TableView<Books> tbBooks;
+    @FXML TableView<Book> tbBooks;
     @FXML TextField txtAuthors;
     @FXML TextArea txtDescribe;
     @FXML TextField txtCategory;
@@ -35,6 +36,7 @@ public class PrimaryController implements Initializable{
     @FXML TextField txtLocation;
     @FXML TextField txtKeyword;
     @FXML ComboBox cbKeyword;
+    @FXML Label lbDate;
     private void loadBooks(){
         TableColumn clId = new TableColumn("Mã sách");
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -59,14 +61,14 @@ public class PrimaryController implements Initializable{
             TableCell cell = new TableCell();
             Button btn = new Button("Xóa");
             btn.setOnAction(evt -> {
-                // thực hiện sự kiện xóa câu hỏi
+                
                 Button bt = (Button) evt.getSource();
                 TableCell c = (TableCell) bt.getParent();
-                Books b = (Books) c.getTableRow().getItem();
+                Book b = (Book) c.getTableRow().getItem();
                 
                 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Bạn chắc chắn xóa? Nó sẽ xóa các lựa chọn liên quan!");
+                alert.setContentText("Bạn chắc chắn xóa? lịch sử mượn sách vẫn sẽ giữ lại");
                 alert.showAndWait().ifPresent(res -> {
                     if (res == ButtonType.OK) {
                         try {
@@ -94,7 +96,7 @@ public class PrimaryController implements Initializable{
     }
     
     public void addBooksHandler(ActionEvent evt) {
-        Books q = new Books(txtName.getText(),txtAuthors.getText(),txtDescribe.getText()
+        Book q = new Book(txtName.getText(),txtAuthors.getText(),txtDescribe.getText()
                 ,txtPublisher.getText(),txtCategory.getText(),txtLocation.getText() ,(txtPublishYear.getText()));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (BookServices.addBook(q) == true) {
@@ -109,7 +111,6 @@ public class PrimaryController implements Initializable{
         }
         
         alert.show();
-        System.out.println(q.getName() + " " + q.getAuthor());
     }
     
     public void clearTextHandler(ActionEvent evt) {
@@ -120,6 +121,7 @@ public class PrimaryController implements Initializable{
         txtName.clear();
         txtPublishYear.clear();
         txtPublisher.clear();
+        lbDate.setText("");
     }
     
     @Override
@@ -143,7 +145,7 @@ public class PrimaryController implements Initializable{
         tbBooks.setRowFactory(evt -> {
             TableRow row = new TableRow();
             row.setOnMouseClicked(et -> {
-                Books b = tbBooks.getSelectionModel().getSelectedItem();
+                Book b = tbBooks.getSelectionModel().getSelectedItem();
                 txtName.setText(b.getName());
                 txtAuthors.setText(b.getAuthor());
                 txtCategory.setText(b.getCategory());
@@ -151,6 +153,7 @@ public class PrimaryController implements Initializable{
                 txtPublishYear.setText(b.getYear());
                 txtLocation.setText(b.getLocation());
                 txtDescribe.setText(b.getDescribe());
+                lbDate.setText(b.getDayAdded().toString());
             });
             return row;
         });
@@ -171,5 +174,6 @@ public class PrimaryController implements Initializable{
                 });
             }
         });
+        
     }
 }

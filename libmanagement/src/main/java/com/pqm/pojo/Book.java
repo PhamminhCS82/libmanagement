@@ -5,11 +5,27 @@
  */
 package com.pqm.pojo;
 
+import java.sql.Date;
+
 /**
  *
  * @author pminh
  */
-public class Books {
+public class Book {
+
+    /**
+     * @return the dayAdded
+     */
+    public Date getDayAdded() {
+        return dayAdded;
+    }
+
+    /**
+     * @param dayAdded the dayAdded to set
+     */
+    public void setDayAdded(Date dayAdded) {
+        this.dayAdded = dayAdded;
+    }
 
     /**
      * @return the location
@@ -131,8 +147,9 @@ public class Books {
     private String year;
     private String category;
     private String location;
-    public Books(int id, String name, String author,
-            String describe, String publisher, String category,String location ,String year){
+    private Date dayAdded;
+    public Book(int id, String name, String author,
+            String describe, String publisher, String category,String location ,String year, Date d){
         this.id = id;
         this.name = name;
         this.author = author;
@@ -141,8 +158,9 @@ public class Books {
         this.category = category;
         this.location = location;
         this.year = year;
+        this.dayAdded = d;
     }
-    public Books(String name, String author,
+    public Book(String name, String author,
             String describe, String publisher, String category,String location, String year){
         this.name = name;
         this.author = author;
@@ -151,5 +169,6 @@ public class Books {
         this.category = category;
         this.location = location;
         this.year = year;
+        this.dayAdded = new Date(System.currentTimeMillis());
     }
 }
