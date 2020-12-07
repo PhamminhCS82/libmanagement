@@ -47,7 +47,12 @@ public class RegisterController implements Initializable{
                 ,txtDateOfBirth.getValue().toString(),txtPosition.getText(),txtDepartment.getText()
                 , txtEmail.getText(), txtAddress.getText() ,txtPhoneNum.getText()
                 , txtLoginId.getText(), txtPassword.getText());
-//        System.out.println(u.getPhoneNumber());
+        System.out.println(txtLoginId.getText());
+        System.out.println(txtPassword.getText());
+//        System.out.println(txtDepartment.getText());
+//        System.out.println(txtEmail.getText());
+//        System.out.println(txtAddress.getText());
+//        System.out.println(txtPhoneNum.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (UserServices.addUser(u) == true) {
             alert.setContentText("SUCCESSFUL");

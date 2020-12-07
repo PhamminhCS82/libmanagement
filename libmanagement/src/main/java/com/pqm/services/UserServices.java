@@ -21,16 +21,12 @@ import java.util.logging.Logger;
 public class UserServices {
     public static boolean addUser(User u) { 
         Connection conn = JdbcUtils.getConnection();
-        Calendar calendar = Calendar.getInstance();
-        Date date = u.getCreatedDate();
-        calendar.setTime(date);
-        calendar.add(Calendar.YEAR, 3);
         try {
             
             conn.setAutoCommit(false);
             String sql = "INSERT INTO users(userId, surname, firstname, sex, dateofbirth"
-                    + ", position, department, createddate, expirieddate, email"
-                    + ", address, phone, loginId, password)"
+                    + ", position, department, createddate, expirieddate"
+                    + ", email, address, phone, loginId, password)"
                     + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, u.getUserId());
@@ -45,8 +41,8 @@ public class UserServices {
             stm.setString(10, u.getEmail());
             stm.setString(11, u.getAddress());
             stm.setString(12, u.getPhoneNumber());
-            stm.setString(11, u.getLoginId());
-            stm.setString(11, u.getPassword());
+            stm.setString(13, u.getLoginId());
+            stm.setString(14, u.getPassword());
             stm.executeUpdate();
             conn.commit();
             

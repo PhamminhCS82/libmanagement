@@ -29,7 +29,7 @@ public class StringUtils {
         for(i = 1; i < surName.length(); i++)
         {
             if(Character.toString(surName.charAt(i)).equals(" "))
-                kq += Character.toString(surName.charAt(i));
+                kq += Character.toString(surName.charAt(i+1));
         }
         return kq.toLowerCase();
     }

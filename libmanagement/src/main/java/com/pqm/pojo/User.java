@@ -257,5 +257,7 @@ public class User {
         this.createdDate = date;
         this.expiriedDate = new Date(calendar.getTimeInMillis());
         this.phoneNumber = phoneNum;
+        this.loginId = loginId;
+        this.password = password;
     }
 }
