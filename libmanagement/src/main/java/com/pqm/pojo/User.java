@@ -240,7 +240,7 @@ public class User {
     private Date expiriedDate;
     private String phoneNumber;
     public User(String userId, String surname,String firstname,String sex, String dateOfBirth, String positon
-            , String department,String email,String address, String phoneNum, String loginId, String password){
+            , String department,String email,String address, String phoneNum){
         Calendar calendar = Calendar.getInstance();
         Date date = new Date(System.currentTimeMillis());
         calendar.setTime(date);
@@ -257,7 +257,20 @@ public class User {
         this.createdDate = date;
         this.expiriedDate = new Date(calendar.getTimeInMillis());
         this.phoneNumber = phoneNum;
-        this.loginId = loginId;
-        this.password = password;
+    }
+    public User(String userId, String surname, String firstname, String sex, String dateOfBirth, String position
+            ,String department, String email, String address, String phoneNum, Date ex, Date create){
+              this.userId = userId;
+        this.surname = surname;
+        this.firstname = firstname;
+        this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
+        this.position = position;
+        this.department = department;
+        this.email = email;
+        this.address = address;
+        this.createdDate = create;
+        this.expiriedDate = ex;
+        this.phoneNumber = phoneNum;
     }
 }

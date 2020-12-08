@@ -9,13 +9,7 @@ import com.pqm.pojo.User;
 import com.pqm.services.StringUtils;
 import com.pqm.services.UserServices;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,8 +26,6 @@ public class RegisterController implements Initializable{
     @FXML private TextField txtFirstname;
     @FXML private TextField txtSex;
     @FXML private DatePicker txtDateOfBirth;
-    @FXML private TextField txtLoginId;
-    @FXML private TextField txtPassword;
     @FXML private TextField txtPosition;
     @FXML private TextField txtDepartment;
     @FXML private TextField txtEmail;
@@ -45,14 +37,7 @@ public class RegisterController implements Initializable{
             userId = StringUtils.createUserId(txtSurname.getText(), txtFirstname.getText());
         User u = new User(userId, txtSurname.getText(),txtFirstname.getText(),txtSex.getText()
                 ,txtDateOfBirth.getValue().toString(),txtPosition.getText(),txtDepartment.getText()
-                , txtEmail.getText(), txtAddress.getText() ,txtPhoneNum.getText()
-                , txtLoginId.getText(), txtPassword.getText());
-        System.out.println(txtLoginId.getText());
-        System.out.println(txtPassword.getText());
-//        System.out.println(txtDepartment.getText());
-//        System.out.println(txtEmail.getText());
-//        System.out.println(txtAddress.getText());
-//        System.out.println(txtPhoneNum.getText());
+                , txtEmail.getText(), txtAddress.getText() ,txtPhoneNum.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (UserServices.addUser(u) == true) {
             alert.setContentText("SUCCESSFUL");

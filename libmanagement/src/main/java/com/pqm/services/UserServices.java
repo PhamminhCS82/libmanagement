@@ -9,6 +9,7 @@ import com.pqm.pojo.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -26,8 +27,8 @@ public class UserServices {
             conn.setAutoCommit(false);
             String sql = "INSERT INTO users(userId, surname, firstname, sex, dateofbirth"
                     + ", position, department, createddate, expirieddate"
-                    + ", email, address, phone, loginId, password)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + ", email, address, phone)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, u.getUserId());
             stm.setString(2, u.getSurname());
@@ -41,8 +42,6 @@ public class UserServices {
             stm.setString(10, u.getEmail());
             stm.setString(11, u.getAddress());
             stm.setString(12, u.getPhoneNumber());
-            stm.setString(13, u.getLoginId());
-            stm.setString(14, u.getPassword());
             stm.executeUpdate();
             conn.commit();
             
@@ -55,6 +54,21 @@ public class UserServices {
             }
         }        
         return false;
+    }
+    
+    public static User getUserByUserLoginIdAndPassword(String loginId, String password) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "SELECT * FROM users WHERE loginId = ? AND password = ?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, loginId);
+        stm.setString(2, password);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next())
+            return new User(rs.getString("userId"), rs.getString("surname"), rs.getString("firstname")
+                    , rs.getString("sex"), rs.getString("dateofbirth"), rs.getString("position")
+            , rs.getString("department"), rs.getString("email"), rs.getString("address"), rs.getString("phone")
+            , rs.getDate("expirieddate"), rs.getDate("createddate"));
+        return null;
     }
 
 }

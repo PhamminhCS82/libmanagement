@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" stylesheets="@../../../styles/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0" stylesheets="@../../../styles/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.LoginController">
    <children>
       <HBox prefHeight="137.0" prefWidth="300.0" styleClass="userPic">
          <children>
@@ -41,7 +40,7 @@
       </TextField>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="49.0" prefWidth="300.0" styleClass="dangKy">
          <children>
-            <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" styleClass="btDangKy" text="Đăng ký">
+            <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#registerHandler" styleClass="btDangKy" text="Đăng ký">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>

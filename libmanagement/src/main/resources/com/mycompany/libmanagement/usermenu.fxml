@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="377.0" prefWidth="304.0" text="Mượn sách" />
+            <Button mnemonicParsing="false" prefHeight="422.0" prefWidth="316.0" text="Cập nhật thông tin" />
+         </children>
+      </HBox>
+   </center>
+   <top>
+      <HBox prefHeight="23.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="17.0" prefWidth="57.0" text="Xin chào " />
+            <Label prefHeight="17.0" prefWidth="229.0" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
