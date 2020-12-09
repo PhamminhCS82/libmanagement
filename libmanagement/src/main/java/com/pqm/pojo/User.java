@@ -273,4 +273,20 @@ public class User {
         this.expiriedDate = ex;
         this.phoneNumber = phoneNum;
     }
+    public User(int id, String userId, String surname,String firstname,String sex, String dateOfBirth, String positon
+            , String department,String email,String address, String phoneNum, Date ex, Date create){
+        this.id = id;
+        this.userId = userId;
+        this.surname = surname;
+        this.firstname = firstname;
+        this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
+        this.position = positon;
+        this.department = department;
+        this.email = email;
+        this.address = address;
+        this.createdDate = create;
+        this.expiriedDate = ex;
+        this.phoneNumber = phoneNum;
+    }
 }

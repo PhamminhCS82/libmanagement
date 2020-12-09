@@ -7,13 +7,13 @@ package com.pqm.services;
 
 import com.pqm.pojo.User;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -69,6 +69,49 @@ public class UserServices {
             , rs.getString("department"), rs.getString("email"), rs.getString("address"), rs.getString("phone")
             , rs.getDate("expirieddate"), rs.getDate("createddate"));
         return null;
+    }
+    
+    public static ObservableList<User> getUsers(String kw) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "SELECT * FROM libmanage.users";
+        if(kw != null && !kw.trim().isEmpty())
+        {
+                sql += " WHERE userId like ? OR surname like ? "
+                        + "OR firstname like ? OR sex like ? OR dateofbirth like ?";     
+        }
+        PreparedStatement stm = conn.prepareStatement(sql);
+        if (kw != null && !kw.trim().isEmpty())
+        {
+            stm.setString(1, String.format("%%%s%%", kw.trim()));
+            stm.setString(2, String.format("%%%s%%", kw.trim()));
+            stm.setString(3, String.format("%%%s%%", kw.trim()));
+            stm.setString(4, String.format("%%%s%%", kw.trim()));
+            stm.setString(5, String.format("%%%s%%", kw.trim()));
+        }
+        ResultSet rs = stm.executeQuery();
+        ObservableList<User> users = FXCollections.observableArrayList();
+        while(rs.next())
+        {
+            User u = new User(rs.getInt("id") ,rs.getString("userId")
+                    , rs.getString("surname"), rs.getString("firstname")
+                    , rs.getString("sex"), rs.getString("dateofbirth")
+                    , rs.getString("position"),rs.getString("department")
+                    , rs.getString("email"), rs.getString("address"), rs.getString("phone")
+                    , rs.getDate("createddate"), rs.getDate("expirieddate"));
+            users.add(u);
+        }
+        return users;
+    }
+    
+    public static boolean deleteUser(int id) throws SQLException {
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "DELETE FROM users WHERE id=?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        
+        int kq = stm.executeUpdate();
+        
+        return kq > 0;
     }
 
 }

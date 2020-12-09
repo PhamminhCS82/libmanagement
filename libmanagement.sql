@@ -85,22 +85,19 @@ CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userId` varchar(50) NOT NULL,
   `surname` varchar(45) DEFAULT NULL,
-  `firstname` varchar(45) DEFAULT NULL,
-  `sex` varchar(45) DEFAULT NULL,
+  `firstname` varchar(60) DEFAULT NULL,
+  `sex` varchar(60) DEFAULT NULL,
   `dateofbirth` varchar(50) DEFAULT NULL,
-  `position` varchar(45) DEFAULT NULL,
-  `department` varchar(45) DEFAULT NULL,
+  `position` varchar(60) DEFAULT NULL,
+  `department` varchar(60) DEFAULT NULL,
   `createddate` date DEFAULT NULL,
   `expirieddate` date DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `address` varchar(45) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `address` varchar(60) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `loginId` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`,`userId`),
-  UNIQUE KEY `password_UNIQUE` (`password`),
-  UNIQUE KEY `loginId_UNIQUE` (`loginId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `borrow` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`,`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +106,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487','minhpq','123456789');
+INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487',0),(3,'A','B','C','D','E','F','G','2020-11-11','2023-11-11','aaaaaa','ccccccc','ddddddddd',0),(4,'qfqwfqfq.d',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(5,'adadadq qeqweq.q','qweqwrqraf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(6,'qfqfqwfqf.a','asdqfqfqf','qfqfqwfqf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(7,'dasdfqwfqf.s','sdqfqwfqwf','dasdfqwfqf','wfqwfqwqwfqf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(8,'fasfafasfa eqweqweqwe.e','eqweqdrasfaffasfas','fasfafasfa eqweqweqwe','dqwgaf','2020-11-29',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(9,'qdqwdqrqr.f','fafqwrfqdq','qdqwdqrqr','qwfqwfqwfqwdas','2005-12-07','qdqwfq','fqwfqwfqwf',NULL,NULL,NULL,NULL,NULL,0),(10,'dqwdqdasda.d','dadqwfqwfaf','dqwdqdasda','qdqwdqwdq','2002-12-16','dqqfqwfqw','qfqwfqwfqwfwq','2020-12-07','2023-12-07',NULL,NULL,NULL,0),(11,'dqwfqwgqwgq.q','qwdqwfqgqgas','dqwfqwgqwgq','afqwgfqgqwg','2016-12-15','qwdqgqgq','qwfqwfqwgf','2020-12-07','2023-12-07','fqfqwfwfqw','qwdqwdqdqwrf',NULL,0),(12,'qwqdqwdqdqwd.q','qgfqgqgasga','qwqdqwdqdqwd','fqwfqwfqwfqw','2007-12-05','dqwdq','fqwfqfqwf','2020-12-07','2023-12-07','ffqwfqfqfqfq','fqfqfqwfqffqfqwfqqwf','dqdqfqwqwfqw',0),(13,'fqwfqwfqwfq.d','dqwfqgfqwfwq','fqwfqwfqwfq','dasdadqdqd','2020-12-24','qwdqwdqd','dqfqqwfqwf','2020-12-07','2023-12-07','qfqgqg','qfqfqfqw','qwfqwfqwfqwg',0),(14,'adqwdqdq.d','dqdqwfqfqw','adqwdqdq','qgffqwgqwfq','2020-06-15','qwfqfqwf','fqwfqfq','2020-12-07','2023-12-07','fqfqwfqwfqw','fqfqwfq','fqwfqfqw',0),(15,'dasfqfq','dqdqdqd','dqwdqwdqwdqwd','qdqwdqwfqwf','dasda','sdadqdqd','dqwdqwdqd',NULL,NULL,'qdqwdqwdq','dqwdqdqwd',NULL,0),(16,'fqwfqfqwf.d','dqwdqwdqwf','fqwfqfqwf','qqwfqfqf','2013-12-04','sdqdqdf','qwfqwf','2020-12-07','2023-12-07','fqwfqwf','fqwfqwf','fqwfqwfq',0),(18,'qfqwfqfqf.d','dâfqf','qfqwfqfqf','fqwfqwfqwf','2020-04-05','fqwfqwfqwf','sffqwfqwf','2020-12-09','2023-12-09','fqwfs','qfqfqff','qfqwdeqqd',NULL),(19,'dqdsdqdqdqwd.a','afqfqqwd','dqdsdqdqdqwd','fqfqwfqwqwdqd','2000-12-19','dqdasdqw','qdqdqdqd','2020-12-09','2023-12-09','qừqwqwrqw','qừqweqweqwd','qưdqwdqwdq',NULL),(20,'dqdqdqd.đ','đầqừ','dqdqdqd','qdqqdqd','2000-12-06','dqwdqdq','qưdqdqwd','2020-12-09','2023-12-09','dqfqwfqwfq','qfqwfqwqwd','qưdqwdqwdqw',NULL),(21,'fqwfqwqff.d','dqwqwdqwd','fqwfqwqff','qdqwdqwd','1999-12-15','qwdqwdqw','dqwdqqw','2020-12-09','2023-12-09','fqwfqwfqw','fqwfqwfqw','qdqwdqwdqd',NULL),(22,'dqwdqwdqwdqw.đ','đáqrdqửqưdq','dqwdqwdqwdqw','qdqwdqwdqwd','2000-12-04','dqwdqdq','dqwdqwd','2020-12-09','2023-12-09','qưdqwdqwd','dqdqwdq','dqwdqwdq',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -122,4 +119,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-07  3:09:19
+-- Dump completed on 2020-12-10  1:08:52

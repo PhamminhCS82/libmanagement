@@ -53,6 +53,8 @@ public class BorrowBookController implements Initializable{
         tbBook.setItems(BookServices.getBooks(kw, indexCat));
     }
     
+    
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại"};

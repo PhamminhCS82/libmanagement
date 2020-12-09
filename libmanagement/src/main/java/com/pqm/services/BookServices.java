@@ -7,9 +7,11 @@ package com.pqm.services;
 
 import com.pqm.pojo.Book;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -88,6 +90,28 @@ public class BookServices {
         
         return kq > 0;
     }
+    
+    public static boolean addBorrowBookDetail(int idBook, int idUser){
+        Connection conn = JdbcUtils.getConnection();
+        Calendar calendar = Calendar.getInstance();
+        Date date = new Date(System.currentTimeMillis());
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 30);
+        try {
+            conn.setAutoCommit(false);
+            String sql = "INSERT INTO borrow(user_id, book_id, startdate, enddate) "
+                    + "VALUES(?, ?, ?, ?)";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setInt(1, idUser);
+            stm.setInt(2, idBook);
+            stm.setDate(3, date);
+            stm.setDate(4, new Date(calendar.getTimeInMillis()));
+        } catch (SQLException ex) {
+            Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     enum ComboCat{
         name(0), authors(1), publisher(2), category(3);
         private final int index;
