@@ -38,15 +38,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="49.0" prefWidth="300.0" styleClass="dangKy">
-         <children>
-            <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#registerHandler" styleClass="btDangKy" text="Đăng ký">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="49.0" prefWidth="300.0" styleClass="dangKy" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button mnemonicParsing="false" styleClass="btDangNhap" text="Đăng nhập" />

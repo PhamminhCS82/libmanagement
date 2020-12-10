@@ -1,6 +1,7 @@
 package com.mycompany.libmanagement;
 
 import com.pqm.pojo.Book;
+import com.pqm.pojo.User;
 import com.pqm.services.BookServices;
 import java.net.URL;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -19,16 +21,44 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class BorrowBookController implements Initializable{
     @FXML
-    private TableView tbBook;
+    private TableView<Book> tbBook;
     @FXML
-    private TableView tbBorrow;
+    private TableView<Book> tbBorrow;
     @FXML
     private ComboBox cbKeyword;
     @FXML
     private TextField txtKeyword;
+    private int id = 0;
+    public int getUserId(User u){
+        this.id = u.getId();
+        return id;
+    }
+    public void borrowBookHandler(ActionEvent evt) throws SQLException{
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        boolean flag = false;
+        for(Book book : tbBorrow.getItems())
+        {
+            flag = BookServices.addBorrowBookDetail(book.getId(), id);
+            if(!flag)
+            {
+                alert.setContentText("Thất bại");
+                alert.show();
+                BookServices.deleteBorrowDetail(id);
+                return;
+            }
+        }
+        if(flag){
+            alert.setContentText("Thành công");
+            alert.show();
+            Stage stage = (Stage) tbBorrow.getScene().getWindow(); 
+            stage.close(); 
+        }
+    }
+    
     public ObservableList<Book> listB = FXCollections.observableArrayList();
     public void loadBook(TableView tb){
         TableColumn clName = new TableColumn("Tên sách");
@@ -89,7 +119,7 @@ public class BorrowBookController implements Initializable{
                         alert.show();
                 }
             }); 
-        return row ; 
+        return row; 
         }); 
     }
     

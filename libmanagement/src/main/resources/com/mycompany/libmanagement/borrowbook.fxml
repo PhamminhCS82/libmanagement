@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.BorrowBookController">
    <children>
       <ComboBox fx:id="cbKeyword" prefWidth="150.0" />
@@ -16,6 +15,6 @@
       <TableView fx:id="tbBook" prefHeight="200.0" prefWidth="200.0" />
       <Label text="Bảng mượn sách" />
       <TableView fx:id="tbBorrow" prefHeight="200.0" prefWidth="200.0" />
-      <Button mnemonicParsing="false" text="Xác nhận" />
+      <Button mnemonicParsing="false" onAction="#borrowBookHandler" text="Xác nhận" />
    </children>
 </VBox>

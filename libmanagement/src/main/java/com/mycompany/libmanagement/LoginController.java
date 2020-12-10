@@ -23,10 +23,7 @@ import javafx.scene.control.TextField;
 
 public class LoginController implements Initializable{
     @FXML private TextField txtLoginId;
-    @FXML private TextField txtPassword;
-    public void registerHandler(ActionEvent evt) throws IOException{
-    }
-    
+    @FXML private TextField txtPassword;   
     public void loginHandler(ActionEvent evt) throws SQLException{
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if(UserServices.getUserByUserLoginIdAndPassword(txtLoginId.getText(), txtPassword.getText()) != null)

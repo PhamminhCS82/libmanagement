@@ -14,6 +14,48 @@ import java.sql.Date;
 public class Book {
 
     /**
+     * @return the borrowId
+     */
+    public String getBorrowId() {
+        return borrowId;
+    }
+
+    /**
+     * @param borrowId the borrowId to set
+     */
+    public void setBorrowId(String borrowId) {
+        this.borrowId = borrowId;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
      * @return the dayAdded
      */
     public Date getDayAdded() {
@@ -140,6 +182,7 @@ public class Book {
     }
 
     private int id;
+    private String borrowId;
     private String name;
     private String author;
     private String describe;
@@ -148,6 +191,8 @@ public class Book {
     private String category;
     private String location;
     private Date dayAdded;
+    private Date startDate;
+    private Date endDate;
     public Book(int id, String name, String author,
             String describe, String publisher, String category,String location ,String year, Date d){
         this.id = id;
@@ -170,5 +215,14 @@ public class Book {
         this.location = location;
         this.year = year;
         this.dayAdded = new Date(System.currentTimeMillis());
+    }
+    public Book(String borrowId, String name, String category, String author, String publisher, Date startDate, Date enDate){
+        this.borrowId = borrowId;
+        this.name = name;
+        this.category = category;
+        this.author = author;
+        this.publisher = publisher;
+        this.startDate = startDate;
+        this.endDate = enDate;
     }
 }

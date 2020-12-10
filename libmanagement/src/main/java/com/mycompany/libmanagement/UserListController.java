@@ -6,9 +6,11 @@
 package com.mycompany.libmanagement;
 
 import com.pqm.pojo.User;
+import com.pqm.services.BookServices;
 import com.pqm.services.UserServices;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -97,15 +100,25 @@ public class UserListController implements Initializable{
                     Button bt = (Button) evt.getSource();
                     TableCell c = (TableCell) bt.getParent();
                     User u = (User) c.getTableRow().getItem();
-                    FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("borrowbook.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    Stage borrowBookStage = new Stage();
-                    borrowBookStage.setTitle("Danh mục sách trong thư viện");
-                    borrowBookStage.setScene(scene);
-                    borrowBookStage.initModality(Modality.APPLICATION_MODAL);
-                    borrowBookStage.show();
-                } catch (IOException ex) {
+                    if(BookServices.isUserReturnBook(u.getId())){
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("borrowbook.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        Stage borrowBookStage = new Stage();
+                        borrowBookStage.setTitle("Danh mục sách trong thư viện");
+                        BorrowBookController controller = loader.getController();
+                        controller.getUserId(u);
+                        borrowBookStage.setScene(scene);
+                        borrowBookStage.initModality(Modality.APPLICATION_MODAL);
+                        borrowBookStage.show();
+                    }
+                    else
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Chưa trả sách!!!");
+                        alert.show();
+                    }
+                } catch (IOException | SQLException ex) {
                     Logger.getLogger(UserListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
@@ -113,9 +126,43 @@ public class UserListController implements Initializable{
             return cell;
         });
         
-        
+        TableColumn clReturnAction = new TableColumn();
+        clReturnAction.setCellFactory(et -> {
+            TableCell cell = new TableCell();
+            Button btn = new Button("Trả sách");
+            btn.setOnAction(evt -> {
+                
+                try {
+                    Button bt = (Button) evt.getSource();
+                    TableCell c = (TableCell) bt.getParent();
+                    User u = (User) c.getTableRow().getItem();
+                    if(!BookServices.isUserReturnBook(u.getId())){
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("returnbook.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        ReturnBookController controller = loader.getController();
+                        controller.loadBooks(u);
+                        Stage borrowBookStage = new Stage();
+                        borrowBookStage.setTitle("Danh mục sách chưa trả");
+                        borrowBookStage.setScene(scene);
+                        borrowBookStage.initModality(Modality.APPLICATION_MODAL);
+                        borrowBookStage.show();
+                    }
+                    else
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Không có sách nào để trả!!");
+                        alert.show();
+                    }
+                } catch (IOException | SQLException ex) {
+                    Logger.getLogger(UserListController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            cell.setGraphic(btn);
+            return cell;
+        });
         tbUser.getColumns().addAll(clId,clSurname,clFirstname
-                ,clSex,clBirthDay,clPosition,clAction, clBorrowAction);
+                ,clSex,clBirthDay,clPosition,clAction, clBorrowAction, clReturnAction);
     }
     
     private void loadData(String kw) throws SQLException{
@@ -153,5 +200,28 @@ public class UserListController implements Initializable{
         } catch (SQLException ex) {
             Logger.getLogger(UserListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        tbUser.setRowFactory(tv -> {
+            TableRow<User> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    User rowData = row.getItem();
+                    try {
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("userform.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        UserformController controller = loader.getController();
+                        controller.setUser(rowData);
+                        Stage borrowBookStage = new Stage();
+                        borrowBookStage.setTitle("Thông tin thành viên");
+                        borrowBookStage.setScene(scene);
+                        borrowBookStage.initModality(Modality.APPLICATION_MODAL);
+                        borrowBookStage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(UserListController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            return row;
+        });
     }
 }

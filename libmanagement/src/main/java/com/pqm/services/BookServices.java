@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -99,18 +100,82 @@ public class BookServices {
         calendar.add(Calendar.DATE, 30);
         try {
             conn.setAutoCommit(false);
-            String sql = "INSERT INTO borrow(user_id, book_id, startdate, enddate) "
-                    + "VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO borrow(id, users_id, books_id, startdate, enddate) "
+                    + "VALUES(?, ?, ?, ?, ?)";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, idUser);
-            stm.setInt(2, idBook);
-            stm.setDate(3, date);
-            stm.setDate(4, new Date(calendar.getTimeInMillis()));
+            stm.setString(1, UUID.randomUUID().toString());
+            stm.setInt(2, idUser);
+            stm.setInt(3, idBook);
+            stm.setDate(4, date);
+            stm.setDate(5, new Date(calendar.getTimeInMillis()));
+            stm.executeUpdate();
+            conn.commit();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        return false;
+    }
+    
+    public static void deleteBorrowDetail(int idUser) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        Date date = new Date(System.currentTimeMillis());
+        String sql = "DELETE FROM borrow WHERE users_id =? AND startdate =? AND returndate is null";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, idUser);
+        stm.setDate(2, date);
+        stm.executeUpdate();
+    }
+    
+    public static boolean isUserReturnBook(int id) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        int i = -1;
+        String sql = "SELECT users_id FROM borrow WHERE users_id =? AND returndate is null";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next())
+              i = rs.getInt("users_id");
+        return i < 0;
+    }
+    
+    public static ObservableList<Book> getBookStillNotReturn(int id) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "call libmanage.userbookstillnotreturn(?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, id);
+        ResultSet rs = stm.executeQuery();
+        ObservableList<Book> books = FXCollections.observableArrayList();
+        while(rs.next()){
+            Book b = new Book(rs.getString("id"),rs.getString("name"),rs.getString("category"),rs.getString("authors")
+            ,rs.getString("publisher"),rs.getDate("startdate"),rs.getDate("enddate"));
+            books.add(b);
+        }
+        return books;
+    }
+    
+    public static boolean returnBook(String id){
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "UPDATE borrow SET returndate =? WHERE id = ?";
+        try { 
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setDate(1, new Date(System.currentTimeMillis()));
+            stm.setString(2, id);
+            stm.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
+    
+//    public static ObservableList<Book> getBookReturnByUser(int id){
+//    }
     
     enum ComboCat{
         name(0), authors(1), publisher(2), category(3);
