@@ -1,3 +1,7 @@
 # Lib_management
 
-Đừng MERGE nhánh FRONT-END. Nó đang bị MojoExecutionException
+Phần mềm thử nghiệm
+-Chưa có đăng kí tài khoản
+-Tài khoản dùng để đăng nhập phần quản lý:
+Id:admin
+password:abcd1234

@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.RegisterController">
    <children>
       <GridPane prefHeight="550.0" prefWidth="750.0" stylesheets="@../../../styles/register.css" vgap="40.0">
         <columnConstraints>
@@ -22,8 +22,6 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -35,81 +33,59 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="132.0" styleClass="lb" text="Tên đăng nhập :" textFill="#2c2929" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Label>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Tạo tài khoản" GridPane.columnIndex="1" GridPane.rowIndex="11">
+            <Button mnemonicParsing="false" onAction="#addUserHandler" prefHeight="31.0" prefWidth="115.0" text="Tạo tài khoản" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin></Button>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" prefHeight="21.0" prefWidth="132.0" text="Ngày sinh :" textFill="#2c2929" GridPane.rowIndex="5">
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtAddress" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtPhoneNum" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" prefHeight="21.0" prefWidth="132.0" text="Ngày sinh :" textFill="#2c2929" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="45.0" prefHeight="21.0" prefWidth="132.0" text="Họ và tên :" textFill="#2c2929">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="45.0" prefHeight="21.0" prefWidth="132.0" text="Tên:" textFill="#2c2929" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="45.0" prefHeight="21.0" prefWidth="132.0" text="Giới tính :" textFill="#2c2929" GridPane.rowIndex="4">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="45.0" prefHeight="21.0" prefWidth="132.0" text="Giới tính :" textFill="#2c2929" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="75.0" prefHeight="21.0" prefWidth="132.0" text="Đối tượng :" textFill="#2c2929" GridPane.rowIndex="6">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="75.0" prefHeight="21.0" prefWidth="132.0" text="Đối tượng :" textFill="#2c2929" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="135.0" prefHeight="21.0" prefWidth="132.0" text="Email :" textFill="#2c2929" GridPane.rowIndex="8">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="135.0" prefHeight="21.0" prefWidth="132.0" text="Email :" textFill="#2c2929" GridPane.rowIndex="6">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" prefHeight="21.0" prefWidth="132.0" text="Bộ phận :" textFill="#2c2929" GridPane.rowIndex="7">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" prefHeight="21.0" prefWidth="132.0" text="Bộ phận :" textFill="#2c2929" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="135.0" prefHeight="21.0" prefWidth="132.0" text="Địa chỉ :" textFill="#2c2929" GridPane.rowIndex="9">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="135.0" prefHeight="21.0" prefWidth="132.0" text="Địa chỉ :" textFill="#2c2929" GridPane.rowIndex="7">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="105.0" prefHeight="21.0" prefWidth="132.0" text="Điện thoại :" textFill="#2c2929" GridPane.rowIndex="10">
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="105.0" prefHeight="21.0" prefWidth="132.0" text="Điện thoại :" textFill="#2c2929" GridPane.rowIndex="8">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="132.0" styleClass="lb" text="Mật khẩu : " textFill="#2c2929" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="157.0" layoutY="325.0" promptText="9/11/2000" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField layoutX="157.0" layoutY="220.0" promptText="Nguyễn Văn Anh" GridPane.columnIndex="1" />
-            <TextField layoutX="157.0" layoutY="185.0" stylesheets="@../../../styles/register.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField layoutX="157.0" layoutY="150.0" promptText="Nam" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label alignment="CENTER" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Italic" size="15.0" />
-               </font>
-            </Label>
-            <TextField layoutX="168.0" layoutY="80.0" promptText="nguyenvananh911" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtSurname" layoutX="157.0" layoutY="220.0" promptText="Nguyễn Văn" GridPane.columnIndex="1" />
+            <TextField fx:id="txtSex" layoutX="157.0" layoutY="150.0" promptText="Nam" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label alignment="CENTER" layoutX="622.0" layoutY="60.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2">
-               <font>
-                  <Font name="System Italic" size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="622.0" layoutY="18.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
@@ -119,39 +95,35 @@
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="18.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label alignment="CENTER" layoutX="622.0" layoutY="16.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="622.0" layoutY="16.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="7">
+            <Label alignment="CENTER" layoutX="622.0" layoutY="130.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="622.0" layoutY="130.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <Label alignment="CENTER" layoutX="622.0" layoutY="92.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="622.0" layoutY="92.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <font>
-                  <Font name="System Italic" size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="168.0" prefHeight="21.0" prefWidth="132.0" text="Mã độc giả :" textFill="#2c2929" GridPane.rowIndex="3">
+            <DatePicker fx:id="txtDateOfBirth" prefHeight="25.0" prefWidth="481.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="132.0" text="Họ:" textFill="#2c2929">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField layoutX="152.0" layoutY="163.0" promptText="anh.nv" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label alignment="CENTER" layoutX="622.0" layoutY="168.0" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <TextField fx:id="txtFirstname" promptText="Anh" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" prefHeight="21.0" prefWidth="86.0" text="(Bắt buộc)" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <ComboBox prefWidth="480.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox layoutX="152.0" layoutY="239.0" prefWidth="480.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtPosition" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtDepartment" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
