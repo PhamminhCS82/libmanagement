@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -7,14 +8,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.BorrowBookController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.BorrowBookController">
    <children>
-      <ComboBox fx:id="cbKeyword" prefWidth="150.0" />
-      <TextField fx:id="txtKeyword" />
-      <Label text="Bảng sách" />
+      <ComboBox fx:id="cbKeyword" prefHeight="31.0" prefWidth="117.0" promptText="Tìm theo">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin></ComboBox>
+      <TextField fx:id="txtKeyword" promptText="Nhập tên sách cần tìm" />
+      <Label alignment="CENTER" prefHeight="41.0" prefWidth="599.0" text="Bảng sách">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
       <TableView fx:id="tbBook" prefHeight="200.0" prefWidth="200.0" />
-      <Label text="Bảng mượn sách" />
+      <Label alignment="CENTER" prefHeight="41.0" prefWidth="599.0" text="Bảng mượn sách" textAlignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Label>
       <TableView fx:id="tbBorrow" prefHeight="200.0" prefWidth="200.0" />
-      <Button mnemonicParsing="false" onAction="#borrowBookHandler" text="Xác nhận" />
+      <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#borrowBookHandler" prefHeight="31.0" prefWidth="82.0" text="Xác nhận" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="10.0" left="500.0" top="10.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>
