@@ -12,7 +12,7 @@
       <TableView fx:id="tbUser" prefHeight="394.0" prefWidth="600.0" />
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Quay lại" />
+            <Button mnemonicParsing="false" onAction="#backSceneHandler" text="Quay lại" />
             <Button mnemonicParsing="false" onAction="#addUserHandler" text="Thêm" />
             <Button mnemonicParsing="false" onAction="#refresh" text="Làm mới" />
          </children>

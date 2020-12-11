@@ -6,6 +6,7 @@
 package com.pqm.services;
 
 import com.pqm.pojo.Book;
+import com.pqm.pojo.BorrowDetails;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -174,8 +175,25 @@ public class BookServices {
         return false;
     }
     
-//    public static ObservableList<Book> getBookReturnByUser(int id){
-//    }
+    public static ObservableList<BorrowDetails> getBorrowReturnList(){
+        ObservableList<BorrowDetails> borrow = FXCollections.observableArrayList();
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "call libmanage.bookreturnandfinetable()";
+        try{
+            PreparedStatement stm = conn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                double fine = rs.getDouble("fine");
+                if(fine < 0)
+                    fine = 0;
+                borrow.add(new BorrowDetails(rs.getString("books.name"), rs.getString("users.surname"), rs.getString("firstname")
+                        , rs.getDate("startdate"), rs.getDate("enddate"), rs.getDate("returndate"), fine));
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return borrow;
+    }
     
     enum ComboCat{
         name(0), authors(1), publisher(2), category(3);

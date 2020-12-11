@@ -2,6 +2,7 @@ package com.mycompany.libmanagement;
 
 import com.pqm.pojo.Book;
 import com.pqm.services.BookServices;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -10,7 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +29,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable{
     @FXML TextField txtName;
@@ -124,10 +130,20 @@ public class PrimaryController implements Initializable{
         lbDate.setText("");
     }
     
+    public void backSceneHandler(ActionEvent evt) throws IOException{
+        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("managerlibmenu.fxml"));
+        Parent backParent = loader.load();
+        Scene scene = new Scene(backParent);
+        stage.setScene(scene);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại"};
         cbKeyword.getItems().addAll(Arrays.asList(list));
+        txtDescribe.setWrapText(true);
         try {
             loadBooks();
             loadData("", -1);

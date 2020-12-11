@@ -55,6 +55,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#addBooksHandler" text="Thêm sách" />
             <Button mnemonicParsing="false" onAction="#clearTextHandler" text="Đặt lại" />
+            <Button mnemonicParsing="false" onAction="#backSceneHandler" text="Quay lại" />
          </children>
       </HBox>
    </bottom>

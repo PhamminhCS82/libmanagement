@@ -1,9 +1,7 @@
 # Lib_management
 
-Sửa App.java 
-	scene = new Scene(loadFXML("primary"));
-Sửa PrimaryController
-	clYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-	clAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
-Thêm module-info.java
-	opens com.pqm.pojo to javafx.base
+Phần mềm thử nghiệm
+-Chưa có đăng kí tài khoản
+-Tài khoản dùng để đăng nhập phần quản lý:
+Id:admin
+password:abcd1234

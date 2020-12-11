@@ -289,4 +289,9 @@ public class User {
         this.expiriedDate = ex;
         this.phoneNumber = phoneNum;
     }
+    
+    public User(String loginId, String password){
+        this.loginId = loginId;
+        this.password = password;
+    }
 }

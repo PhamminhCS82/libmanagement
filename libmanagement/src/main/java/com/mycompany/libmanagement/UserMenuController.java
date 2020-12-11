@@ -30,8 +30,8 @@ public class UserMenuController {
         Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("login.fxml"));
-        Parent searchBookParent = loader.load();
-        Scene scene = new Scene(searchBookParent);
+        Parent loginParent = loader.load();
+        Scene scene = new Scene(loginParent);
         stage.setScene(scene);
     }
 }

@@ -27,13 +27,13 @@
          </VBox.margin>
       </HBox>
       <Label text="Tên đăng nhập" />
-      <TextField prefHeight="31.0" prefWidth="186.0" promptText="Tên đăng nhập" styleClass="txtTenDangNhap">
+      <TextField fx:id="txtLoginId" prefHeight="31.0" prefWidth="186.0" promptText="Tên đăng nhập" styleClass="txtTenDangNhap">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </TextField>
       <Label text="Mật khẩu" />
-      <TextField promptText="Mật khẩu" styleClass="txtMatKhau">
+      <TextField fx:id="txtPassword" promptText="Mật khẩu" styleClass="txtMatKhau">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
@@ -41,7 +41,8 @@
       <HBox alignment="BOTTOM_RIGHT" prefHeight="49.0" prefWidth="300.0" styleClass="dangKy" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" styleClass="btDangNhap" text="Đăng nhập" />
+            <Button mnemonicParsing="false" onAction="#loginHandler" styleClass="btDangNhap" text="Đăng nhập" />
+            <Button mnemonicParsing="false" onAction="#backSceneHandler" text="Quay lại" />
          </children>
       </HBox>
    </children>

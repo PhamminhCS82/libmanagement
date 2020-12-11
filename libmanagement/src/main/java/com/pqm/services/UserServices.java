@@ -6,6 +6,7 @@
 package com.pqm.services;
 
 import com.pqm.pojo.User;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,19 +57,21 @@ public class UserServices {
         return false;
     }
     
-    public static User getUserByUserLoginIdAndPassword(String loginId, String password) throws SQLException{
+    public static boolean isIdAndPasswordCorrect(String loginId, String password) throws SQLException, NoSuchAlgorithmException{
         Connection conn = JdbcUtils.getConnection();
-        String sql = "SELECT * FROM users WHERE loginId = ? AND password = ?";
+        StringUtils md5 = new StringUtils();
+        password = md5.convertHashToString(password);
+        String sql = "SELECT * FROM manager WHERE id = ? AND password = ?";
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1, loginId);
         stm.setString(2, password);
         ResultSet rs = stm.executeQuery();
-        while(rs.next())
-            return new User(rs.getString("userId"), rs.getString("surname"), rs.getString("firstname")
-                    , rs.getString("sex"), rs.getString("dateofbirth"), rs.getString("position")
-            , rs.getString("department"), rs.getString("email"), rs.getString("address"), rs.getString("phone")
-            , rs.getDate("expirieddate"), rs.getDate("createddate"));
-        return null;
+        while(rs.next()){
+            User u = new User(rs.getString("id"), rs.getString("password"));             
+            if(u.getLoginId().equals(loginId) && u.getPassword().equals(password))
+                return true;
+        }
+        return false;
     }
     
     public static ObservableList<User> getUsers(String kw) throws SQLException{

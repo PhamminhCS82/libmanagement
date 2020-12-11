@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.mycompany.libmanagement.ManagerLibMenuController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.ManagerLibMenuController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -15,9 +15,9 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" prefHeight="240.0" prefWidth="555.0" text="Quản lý thành viên mượn trả sách" />
-      <Button mnemonicParsing="false" prefHeight="235.0" prefWidth="438.0" text="Danh sách sách đã trả và tiền phạt" GridPane.columnIndex="1" />
-      <Button mnemonicParsing="false" prefHeight="217.0" prefWidth="310.0" text="Quản lý sách thư viện" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" prefHeight="309.0" prefWidth="426.0" text="Đăng xuất" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#switchSceneUserListHandler" prefHeight="240.0" prefWidth="555.0" text="Quản lý thành viên mượn trả sách" />
+      <Button mnemonicParsing="false" onAction="#switchSceneBorrowListHandler" prefHeight="235.0" prefWidth="438.0" text="Danh sách sách đã trả và tiền phạt" GridPane.columnIndex="1" />
+      <Button mnemonicParsing="false" onAction="#switchSceneBookListHandler" prefHeight="217.0" prefWidth="310.0" text="Quản lý sách thư viện" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#logoutSceneHandler" prefHeight="309.0" prefWidth="426.0" text="Đăng xuất" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
