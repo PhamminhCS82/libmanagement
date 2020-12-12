@@ -115,11 +115,6 @@ public class BookServices {
         } catch (SQLException ex) {
             Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-                conn.rollback();
-            } catch (SQLException ex1) {
-                Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex1);
-            }
         return false;
     }
     

@@ -190,6 +190,10 @@ public class PrimaryController implements Initializable{
                 });
             }
         });
-        
+        txtPublishYear.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            txtPublishYear.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+    });
     }
 }
