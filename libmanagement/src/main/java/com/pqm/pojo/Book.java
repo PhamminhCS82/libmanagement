@@ -5,11 +5,69 @@
  */
 package com.pqm.pojo;
 
+import java.sql.Date;
+
 /**
  *
  * @author pminh
  */
-public class Books {
+public class Book {
+
+    /**
+     * @return the borrowId
+     */
+    public String getBorrowId() {
+        return borrowId;
+    }
+
+    /**
+     * @param borrowId the borrowId to set
+     */
+    public void setBorrowId(String borrowId) {
+        this.borrowId = borrowId;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * @return the dayAdded
+     */
+    public Date getDayAdded() {
+        return dayAdded;
+    }
+
+    /**
+     * @param dayAdded the dayAdded to set
+     */
+    public void setDayAdded(Date dayAdded) {
+        this.dayAdded = dayAdded;
+    }
 
     /**
      * @return the location
@@ -124,6 +182,7 @@ public class Books {
     }
 
     private int id;
+    private String borrowId;
     private String name;
     private String author;
     private String describe;
@@ -131,8 +190,11 @@ public class Books {
     private String year;
     private String category;
     private String location;
-    public Books(int id, String name, String author,
-            String describe, String publisher, String category,String location ,String year){
+    private Date dayAdded;
+    private Date startDate;
+    private Date endDate;
+    public Book(int id, String name, String author,
+            String describe, String publisher, String category,String location ,String year, Date d){
         this.id = id;
         this.name = name;
         this.author = author;
@@ -141,8 +203,9 @@ public class Books {
         this.category = category;
         this.location = location;
         this.year = year;
+        this.dayAdded = d;
     }
-    public Books(String name, String author,
+    public Book(String name, String author,
             String describe, String publisher, String category,String location, String year){
         this.name = name;
         this.author = author;
@@ -151,5 +214,15 @@ public class Books {
         this.category = category;
         this.location = location;
         this.year = year;
+        this.dayAdded = new Date(System.currentTimeMillis());
+    }
+    public Book(String borrowId, String name, String category, String author, String publisher, Date startDate, Date enDate){
+        this.borrowId = borrowId;
+        this.name = name;
+        this.category = category;
+        this.author = author;
+        this.publisher = publisher;
+        this.startDate = startDate;
+        this.endDate = enDate;
     }
 }

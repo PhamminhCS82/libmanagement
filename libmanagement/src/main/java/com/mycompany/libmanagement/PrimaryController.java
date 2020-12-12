@@ -1,31 +1,48 @@
 package com.mycompany.libmanagement;
 
-import com.pqm.pojo.Books;
+import com.pqm.pojo.Book;
 import com.pqm.services.BookServices;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable{
     @FXML TextField txtName;
-    @FXML TableView<Books> tbBooks;
+    @FXML TableView<Book> tbBooks;
     @FXML TextField txtAuthors;
     @FXML TextArea txtDescribe;
     @FXML TextField txtCategory;
     @FXML TextField txtPublisher;
     @FXML TextField txtPublishYear;
+    @FXML TextField txtLocation;
+    @FXML TextField txtKeyword;
+    @FXML ComboBox cbKeyword;
+    @FXML Label lbDate;
     private void loadBooks(){
         TableColumn clId = new TableColumn("Mã sách");
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -44,31 +61,54 @@ public class PrimaryController implements Initializable{
         
         TableColumn clYear = new TableColumn("Năm xuất bản");
         clYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-        
-        TableColumn clLocation = new TableColumn("Vị trí");
-        clLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
-        
-        TableColumn clDescribe = new TableColumn("Thông tin");
-        clDescribe.setCellValueFactory(new PropertyValueFactory<>("describe"));
+         
+        TableColumn clAction = new TableColumn();
+        clAction.setCellFactory(et -> {
+            TableCell cell = new TableCell();
+            Button btn = new Button("Xóa");
+            btn.setOnAction(evt -> {
+                
+                Button bt = (Button) evt.getSource();
+                TableCell c = (TableCell) bt.getParent();
+                Book b = (Book) c.getTableRow().getItem();
+                
+                
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText("Bạn chắc chắn xóa? lịch sử mượn sách vẫn sẽ giữ lại");
+                alert.showAndWait().ifPresent(res -> {
+                    if (res == ButtonType.OK) {
+                        try {
+                            if (BookServices.deleteBook(b.getId()))
+                                this.loadData("", -1);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+                
+            });
+            
+            cell.setGraphic(btn);
+            return cell;
+        });
         
         tbBooks.getColumns().addAll(clId,clName,clPublisher
-                ,clAuthor,clCategory,clYear,clDescribe, clLocation);
+                ,clAuthor,clCategory,clYear, clAction);
     }
     
-    private void loadData(String kw) throws SQLException{
+    private void loadData(String kw, int indexCat) throws SQLException{
         tbBooks.getItems().clear();
-        tbBooks.setItems(BookServices.getBooks(kw));
+        tbBooks.setItems(BookServices.getBooks(kw, indexCat));
     }
     
     public void addBooksHandler(ActionEvent evt) {
-        Books q = new Books(txtName.getText(),txtAuthors.getText(),txtDescribe.getText()
-                ,txtPublisher.getText(),txtCategory.getText(),"Khu F" ,(txtPublishYear.getText()));
+        Book q = new Book(txtName.getText(),txtAuthors.getText(),txtDescribe.getText()
+                ,txtPublisher.getText(),txtCategory.getText(),txtLocation.getText() ,(txtPublishYear.getText()));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (BookServices.addBook(q) == true) {
             alert.setContentText("SUCCESSFUL");
             try {
-                tbBooks.getItems().clear();
-                tbBooks.setItems(FXCollections.observableArrayList(BookServices.getBooks("")));
+                loadData("", -1);
             } catch (SQLException ex) {
                 Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -78,13 +118,82 @@ public class PrimaryController implements Initializable{
         
         alert.show();
     }
+    
+    public void clearTextHandler(ActionEvent evt) {
+        txtAuthors.clear();
+        txtCategory.clear();
+        txtDescribe.clear();
+        txtLocation.clear();
+        txtName.clear();
+        txtPublishYear.clear();
+        txtPublisher.clear();
+        lbDate.setText("");
+    }
+    
+    public void backSceneHandler(ActionEvent evt) throws IOException{
+        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("managerlibmenu.fxml"));
+        Parent backParent = loader.load();
+        Scene scene = new Scene(backParent);
+        stage.setScene(scene);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại"};
+        cbKeyword.getItems().addAll(Arrays.asList(list));
+        txtDescribe.setWrapText(true);
         try {
             loadBooks();
-            loadData("");
+            loadData("", -1);
         } catch (SQLException ex) {
             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        txtKeyword.textProperty().addListener(et -> {
+            try {
+                loadData(txtKeyword.getText()
+                        , cbKeyword.getSelectionModel().getSelectedIndex());
+            } catch (SQLException ex) {
+                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        tbBooks.setRowFactory(evt -> {
+            TableRow row = new TableRow();
+            row.setOnMouseClicked(et -> {
+                Book b = tbBooks.getSelectionModel().getSelectedItem();
+                txtName.setText(b.getName());
+                txtAuthors.setText(b.getAuthor());
+                txtCategory.setText(b.getCategory());
+                txtPublisher.setText(b.getPublisher());
+                txtPublishYear.setText(b.getYear());
+                txtLocation.setText(b.getLocation());
+                txtDescribe.setText(b.getDescribe());
+                lbDate.setText(b.getDayAdded().toString());
+            });
+            return row;
+        });
+        tbBooks.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.DELETE) {
+                int index = tbBooks.selectionModelProperty().getValue().getSelectedItem().getId();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText("Bạn chắc chắn xóa? Nó sẽ xóa các lựa chọn liên quan!");
+                alert.showAndWait().ifPresent(res -> {
+                    if (res == ButtonType.OK) {
+                        try {
+                            if (BookServices.deleteBook(index))
+                                this.loadData("", -1);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+            }
+        });
+        txtPublishYear.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            txtPublishYear.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+    });
     }
 }

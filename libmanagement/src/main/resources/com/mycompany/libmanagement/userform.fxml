@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="611.0" stylesheets="@../../../styles/userform.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="611.0" stylesheets="@../../../styles/userform.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.UserformController">
    <children>
       <GridPane vgap="40.0">
         <columnConstraints>
@@ -39,9 +39,9 @@
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor></Button>
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="txtAddress" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="txtPhoneNum" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" prefHeight="21.0" prefWidth="110.0" text="Ngày sinh :" textFill="#2c2929" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -87,13 +87,13 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" />
-            <Label layoutX="132.0" layoutY="15.0" prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label layoutX="132.0" layoutY="50.0" prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label layoutX="132.0" layoutY="85.0" prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label layoutX="132.0" layoutY="120.0" prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label layoutX="132.0" layoutY="155.0" prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label layoutX="132.0" layoutY="190.0" prefHeight="21.0" prefWidth="482.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="lbUserId" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" />
+            <Label fx:id="lbUserName" layoutX="132.0" layoutY="15.0" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbUserSex" layoutX="132.0" layoutY="50.0" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lbDateOfBirth" layoutX="132.0" layoutY="85.0" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="lbPosition" layoutX="132.0" layoutY="120.0" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="lbDepartment" layoutX="132.0" layoutY="155.0" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="lbExpiriedDate" layoutX="132.0" layoutY="190.0" prefHeight="21.0" prefWidth="482.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

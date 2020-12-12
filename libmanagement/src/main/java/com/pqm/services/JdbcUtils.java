@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.libmanagement;
+package com.pqm.services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 //@author pminh 
 public class JdbcUtils {
     private static Connection conn;
-    private static final String user = "root", password = "123456789"; //sua lai user va password de phu hop voi MySQL tren may 
+    private static final String user = "root", password = "9875428Minh"; //sua lai user va password de phu hop voi MySQL tren may 
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
