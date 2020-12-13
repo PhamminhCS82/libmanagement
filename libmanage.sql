@@ -42,7 +42,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (8,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-10-21'),(9,'Lập trình giao diện',NULL,'Tài liệu môn học lập trình giao diện','Đại học quốc gia TP.HCM','Nguyễn Thị Mai Trang','Khu A','Tài liệu',NULL),(10,'13 lý do tại sao',2007,'Tiểu thuyết dành cho người lớn được viết vào năm 2007 bới Jay Asher...','Razorbill','Jay Asher','Khu D','Tiểu thuyết',NULL),(11,'GIÁO TRÌNH NHỮNG NGUYÊN LÝ CƠ BẢN CỦA CHỦ NGHĨA MÁC - LÊNIN',2018,'Thực hiện các Nghị quyết của Đảng Cộng sản Việt Nam, nhất là Nghị quyết Trung ương 5 (khóa X) về công tác tư tưởng, lý luận và báo chí trước yêu cầu mới, ngày 18/9/2008, Bộ Giáo dục và Đào tạo đã ban hành Quyết định số 52/2008/QĐ-BGĐT ban hành Chương trình môn học Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin dành cho sinh viên khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh và phối hợp với Nhà xuất bản Chính trị quốc gia Sự thật xuất bản Giáo Trình Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin (Dành cho sinh viên đại học, cao đăng khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh)','Chính trị Quốc Gia Sự Thật','Bộ giáo dục và đào tạo','Khu C','Chính trị - Pháp luật',NULL),(14,'abc',2020,'fasavzxvxzgas','d','b','àasfa','c',NULL),(15,'c',2020,'fasavzxvxzgas','dâfafafaf','dddđ','àasfa','càafafa','2020-12-06'),(16,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-12-06');
+INSERT INTO `books` VALUES (8,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-10-21'),(9,'Lập trình giao diện',NULL,'Tài liệu môn học lập trình giao diện','Đại học quốc gia TP.HCM','Nguyễn Thị Mai Trang','Khu A','Tài liệu',NULL),(10,'13 lý do tại sao',2007,'Tiểu thuyết dành cho người lớn được viết vào năm 2007 bới Jay Asher...','Razorbill','Jay Asher','Khu D','Tiểu thuyết',NULL),(11,'GIÁO TRÌNH NHỮNG NGUYÊN LÝ CƠ BẢN CỦA CHỦ NGHĨA MÁC - LÊNIN',2018,'Thực hiện các Nghị quyết của Đảng Cộng sản Việt Nam, nhất là Nghị quyết Trung ương 5 (khóa X) về công tác tư tưởng, lý luận và báo chí trước yêu cầu mới, ngày 18/9/2008, Bộ Giáo dục và Đào tạo đã ban hành Quyết định số 52/2008/QĐ-BGĐT ban hành Chương trình môn học Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin dành cho sinh viên khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh và phối hợp với Nhà xuất bản Chính trị quốc gia Sự thật xuất bản Giáo Trình Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin (Dành cho sinh viên đại học, cao đăng khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh)','Chính trị Quốc Gia Sự Thật','Bộ giáo dục và đào tạo','Khu C','Chính trị - Pháp luật',NULL),(14,'abc',2020,'fasavzxvxzgas','d','b','àasfa','c',NULL),(16,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-12-06');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
-INSERT INTO `borrow` VALUES ('00cffd3c-da9a-4c99-bd15-6ef72606d8ba',3,9,'2020-12-10','2021-01-09',NULL),('03ad6ff5-b7ac-4937-8314-2fae6a5040d6',3,9,'2020-12-10','2021-01-09',NULL),('44062dcc-69e2-4c4a-8f02-757658987cbf',3,8,'2020-12-10','2021-01-09',NULL),('6ef52f51-038c-497d-8ea8-465fd679798c',6,8,'2020-12-10','2021-01-09','2020-12-10'),('9547783b-a13c-44a2-bf69-a68ee51a2d8a',4,10,'2020-12-10','2021-01-09',NULL),('ac35bd62-8cd1-45d9-8d65-5468278cbbec',4,8,'2020-12-10','2021-01-09',NULL),('b337e7df-46dd-4bee-ba9a-14c39e8cf0a6',1,8,'2020-12-10','2021-01-09','2020-12-10'),('cabbce01-253e-4759-b11e-4b825c8e95af',3,10,'2020-12-10','2021-01-09',NULL),('e7054210-174c-4ea3-95ea-ad4246ad9e5d',3,11,'2020-12-10','2021-01-09','2020-12-11');
+INSERT INTO `borrow` VALUES ('00cffd3c-da9a-4c99-bd15-6ef72606d8ba',3,9,'2020-12-10','2021-01-09',NULL),('03ad6ff5-b7ac-4937-8314-2fae6a5040d6',3,9,'2020-12-10','2021-01-09',NULL),('0bd95cdc-9c14-4124-aeab-6634606d30d4',1,10,'2020-12-11','2021-01-10',NULL),('44062dcc-69e2-4c4a-8f02-757658987cbf',3,8,'2020-12-10','2021-01-09',NULL),('6ef52f51-038c-497d-8ea8-465fd679798c',6,8,'2020-12-10','2021-01-09','2020-12-10'),('9547783b-a13c-44a2-bf69-a68ee51a2d8a',4,10,'2020-12-10','2021-01-09',NULL),('ac35bd62-8cd1-45d9-8d65-5468278cbbec',4,8,'2020-12-10','2021-01-09',NULL),('b337e7df-46dd-4bee-ba9a-14c39e8cf0a6',1,8,'2020-12-10','2021-01-09','2020-12-10'),('cabbce01-253e-4759-b11e-4b825c8e95af',3,10,'2020-12-10','2021-01-09',NULL),('e7054210-174c-4ea3-95ea-ad4246ad9e5d',3,11,'2020-12-10','2021-01-09','2020-12-11');
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,6 @@ DROP TABLE IF EXISTS `manager`;
 CREATE TABLE `manager` (
   `id` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `department` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -100,6 +99,7 @@ CREATE TABLE `manager` (
 
 LOCK TABLES `manager` WRITE;
 /*!40000 ALTER TABLE `manager` DISABLE KEYS */;
+INSERT INTO `manager` VALUES ('admin','e19d5cd5af0378da05f63f891c7467af');
 /*!40000 ALTER TABLE `manager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,6 +138,102 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487',0),(3,'A','B','C','D','E','F','G','2020-11-11','2023-11-11','aaaaaa','ccccccc','ddddddddd',0),(4,'qfqwfqfq.d',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(5,'adadadq qeqweq.q','qweqwrqraf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(6,'qfqfqwfqf.a','asdqfqfqf','qfqfqwfqf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(7,'dasdfqwfqf.s','sdqfqwfqwf','dasdfqwfqf','wfqwfqwqwfqf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(8,'fasfafasfa eqweqweqwe.e','eqweqdrasfaffasfas','fasfafasfa eqweqweqwe','dqwgaf','2020-11-29',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(9,'qdqwdqrqr.f','fafqwrfqdq','qdqwdqrqr','qwfqwfqwfqwdas','2005-12-07','qdqwfq','fqwfqwfqwf',NULL,NULL,NULL,NULL,NULL,0),(10,'dqwdqdasda.d','dadqwfqwfaf','dqwdqdasda','qdqwdqwdq','2002-12-16','dqqfqwfqw','qfqwfqwfqwfwq','2020-12-07','2023-12-07',NULL,NULL,NULL,0),(11,'dqwfqwgqwgq.q','qwdqwfqgqgas','dqwfqwgqwgq','afqwgfqgqwg','2016-12-15','qwdqgqgq','qwfqwfqwgf','2020-12-07','2023-12-07','fqfqwfwfqw','qwdqwdqdqwrf',NULL,0),(12,'qwqdqwdqdqwd.q','qgfqgqgasga','qwqdqwdqdqwd','fqwfqwfqwfqw','2007-12-05','dqwdq','fqwfqfqwf','2020-12-07','2023-12-07','ffqwfqfqfqfq','fqfqfqwfqffqfqwfqqwf','dqdqfqwqwfqw',0),(14,'adqwdqdq.d','dqdqwfqfqw','adqwdqdq','qgffqwgqwfq','2020-06-15','qwfqfqwf','fqwfqfq','2020-12-07','2023-12-07','fqfqwfqwfqw','fqfqwfq','fqwfqfqw',0),(15,'dasfqfq','dqdqdqd','dqwdqwdqwdqwd','qdqwdqwfqwf','dasda','sdadqdqd','dqwdqwdqd',NULL,NULL,'qdqwdqwdq','dqwdqdqwd',NULL,0),(16,'fqwfqfqwf.d','dqwdqwdqwf','fqwfqfqwf','qqwfqfqf','2013-12-04','sdqdqdf','qwfqwf','2020-12-07','2023-12-07','fqwfqwf','fqwfqwf','fqwfqwfq',0),(18,'qfqwfqfqf.d','dâfqf','qfqwfqfqf','fqwfqwfqwf','2020-04-05','fqwfqwfqwf','sffqwfqwf','2020-12-09','2023-12-09','fqwfs','qfqfqff','qfqwdeqqd',NULL),(19,'dqdsdqdqdqwd.a','afqfqqwd','dqdsdqdqdqwd','fqfqwfqwqwdqd','2000-12-19','dqdasdqw','qdqdqdqd','2020-12-09','2023-12-09','qừqwqwrqw','qừqweqweqwd','qưdqwdqwdq',NULL),(20,'dqdqdqd.đ','đầqừ','dqdqdqd','qdqqdqd','2000-12-06','dqwdqdq','qưdqdqwd','2020-12-09','2023-12-09','dqfqwfqwfq','qfqwfqwqwd','qưdqwdqwdqw',NULL),(21,'fqwfqwqff.d','dqwqwdqwd','fqwfqwqff','qdqwdqwd','1999-12-15','qwdqwdqw','dqwdqqw','2020-12-09','2023-12-09','fqwfqwfqw','fqwfqwfqw','qdqwdqwdqd',NULL),(22,'dqwdqwdqwdqw.đ','đáqrdqửqưdq','dqwdqwdqwdqw','qdqwdqwdqwd','2000-12-04','dqwdqdq','dqwdqwd','2020-12-09','2023-12-09','qưdqwdqwd','dqdqwdq','dqwdqwdq',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'libmanage'
+--
+
+--
+-- Dumping routines for database 'libmanage'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `bookreturnandfinetable` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `bookreturnandfinetable`()
+BEGIN
+	SELECT books.name, users.surname, users.firstname, startdate, enddate, returndate, datediff(returndate, enddate) * 5000 AS fine
+    FROM borrow, books, users
+    where books.id = borrow.books_id
+    AND users.id = borrow.users_id
+    AND returndate is not null;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getfineneedtopay` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getfineneedtopay`()
+BEGIN
+	SELECT datediff(returndate, enddate) * 5000
+    FROM borrow
+    where returndate is not null;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `new_procedure` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_procedure`()
+BEGIN
+	SELECT datediff(returndate, enddate) * 5000
+    FROM borrow
+    where enddate is not null;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `userbookstillnotreturn` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `userbookstillnotreturn`(in id int)
+BEGIN
+	SELECT borrow.id, books.name, books.category, books.authors, books.publisher, borrow.startdate, borrow.enddate
+    FROM books, borrow
+    WHERE books.id = borrow.books_id
+    AND users_id = id
+    AND returndate is null;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -148,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-11  0:57:04
+-- Dump completed on 2020-12-13 12:12:14
