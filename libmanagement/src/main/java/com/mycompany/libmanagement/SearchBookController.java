@@ -86,7 +86,7 @@ public class SearchBookController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtDescribe.setWrapText(true);
-        String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại"};
+        String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại", "Năm xuất bản"};
         cbKeyword.getItems().addAll(Arrays.asList(list));
         try {
             loadBooks();

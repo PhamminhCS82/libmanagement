@@ -141,7 +141,7 @@ public class PrimaryController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại"};
+        String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại", "Năm xuất bản"};
         cbKeyword.getItems().addAll(Arrays.asList(list));
         txtDescribe.setWrapText(true);
         try {
@@ -166,10 +166,16 @@ public class PrimaryController implements Initializable{
                 txtAuthors.setText(b.getAuthor());
                 txtCategory.setText(b.getCategory());
                 txtPublisher.setText(b.getPublisher());
-                txtPublishYear.setText(b.getYear());
+                if(b.getYear() != null)
+                    txtPublishYear.setText(b.getYear());
+                else
+                    txtPublishYear.clear();
                 txtLocation.setText(b.getLocation());
                 txtDescribe.setText(b.getDescribe());
-                lbDate.setText(b.getDayAdded().toString());
+                if(b.getDayAdded()!= null){
+                    lbDate.setText(b.getDayAdded().toString());
+                }else
+                    lbDate.setText("");
             });
             return row;
         });
