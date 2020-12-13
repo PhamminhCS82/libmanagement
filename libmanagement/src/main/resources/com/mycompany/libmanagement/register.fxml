@@ -14,7 +14,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.RegisterController">
    <children>
-      <GridPane prefHeight="550.0" prefWidth="750.0" stylesheets="@../../../styles/register.css" vgap="40.0">
+      <GridPane fx:id="gridPane" prefHeight="550.0" prefWidth="750.0" stylesheets="@../../../styles/register.css" vgap="40.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="160.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="488.0" />
@@ -110,7 +110,7 @@
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
-            <DatePicker fx:id="txtDateOfBirth" prefHeight="25.0" prefWidth="481.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <DatePicker fx:id="txtDateOfBirth" editable="false" prefHeight="25.0" prefWidth="481.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="132.0" text="Họ:" textFill="#2c2929">
                <font>
                   <Font name="System Bold" size="15.0" />

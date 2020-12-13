@@ -13,9 +13,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -42,25 +44,32 @@ public class RegisterController implements Initializable {
     private TextField txtAddress;
     @FXML
     private TextField txtPhoneNum;
+    @FXML
+    private GridPane gridPane;
 
     public void addUserHandler(ActionEvent evt) {
-        String userId = " ";
-        if (txtSurname.getText() != null && txtFirstname.getText() != null) {
-            userId = StringUtils.createUserId(txtSurname.getText(), txtFirstname.getText());
-        }
-        User u = new User(userId, txtSurname.getText(), txtFirstname.getText(), txtSex.getText(),
-                 txtDateOfBirth.getValue().toString(), txtPosition.getText(), txtDepartment.getText(),
-                 txtEmail.getText(), txtAddress.getText(), txtPhoneNum.getText());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if (UserServices.addUser(u) == true) {
-            alert.setContentText("SUCCESSFUL");
-            Stage stage = (Stage) txtAddress.getScene().getWindow();
-            stage.close();
-        } else {
-            alert.setContentText("FAILED");
-        }
+        String userId = " ";
+        if (txtSurname.getText() != null && txtFirstname.getText() != null && txtSex.getText() != null
+                && txtDateOfBirth.getValue() != null && txtPosition.getText() != null && txtDepartment.getText() != null) {
+            userId = StringUtils.createUserId(txtSurname.getText(), txtFirstname.getText());
+            User u = new User(StringUtils.removeAccent(userId), StringUtils.standardizedString(txtSurname.getText()), StringUtils.standardizedString(txtFirstname.getText()), txtSex.getText(),
+                    txtDateOfBirth.getValue().toString(), txtPosition.getText(), txtDepartment.getText(),
+                    txtEmail.getText(), txtAddress.getText(), txtPhoneNum.getText());
 
-        alert.show();
+            if (UserServices.addUser(u) == true) {
+                alert.setContentText("SUCCESSFUL");
+                Stage stage = (Stage) txtAddress.getScene().getWindow();
+                stage.close();
+            } else {
+                alert.setContentText("FAILED");
+            }
+
+            alert.show();
+        } else {
+            alert.setContentText("Chưa nhập đủ thông tin bắt buộc!!!");
+            alert.show();
+        }
     }
 
     @Override
@@ -70,7 +79,5 @@ public class RegisterController implements Initializable {
                 txtPhoneNum.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-        
-        
     }
 }
