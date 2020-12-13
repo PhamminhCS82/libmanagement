@@ -191,7 +191,7 @@ public class BookServices {
     }
     
     enum ComboCat{
-        name(0), authors(1), publisher(2), category(3);
+        name(0), authors(1), publisher(2), category(3), publish_year(4);
         private final int index;
         ComboCat(int index){
             this.index = index;

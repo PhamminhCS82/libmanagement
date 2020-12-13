@@ -18,7 +18,7 @@
          <VBox.margin>
             <Insets left="10.0" />
          </VBox.margin></Label>
-      <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Tìm theo">
+      <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Tên sách">
          <VBox.margin>
             <Insets left="5.0" />
          </VBox.margin></ComboBox>
