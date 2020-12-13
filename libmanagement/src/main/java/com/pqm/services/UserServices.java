@@ -100,7 +100,7 @@ public class UserServices {
                     , rs.getString("sex"), rs.getString("dateofbirth")
                     , rs.getString("position"),rs.getString("department")
                     , rs.getString("email"), rs.getString("address"), rs.getString("phone")
-                    , rs.getDate("createddate"), rs.getDate("expirieddate"));
+                    , rs.getDate("expirieddate"), rs.getDate("createddate"));
             users.add(u);
         }
         return users;

@@ -102,7 +102,8 @@ public class UserListController implements Initializable{
                     Button bt = (Button) evt.getSource();
                     TableCell c = (TableCell) bt.getParent();
                     User u = (User) c.getTableRow().getItem();
-                    if(BookServices.isUserReturnBook(u.getId())){
+                    Date dat = new Date(System.currentTimeMillis());
+                    if(BookServices.isUserReturnBook(u.getId()) && dat.before(u.getExpiriedDate())){
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(getClass().getResource("borrowbook.fxml"));
                         Scene scene = new Scene(loader.load());
@@ -117,7 +118,7 @@ public class UserListController implements Initializable{
                     else
                     {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setContentText("Chưa trả sách!!!");
+                        alert.setContentText("Chưa trả sách hoặc thẻ đã hết hạn");
                         alert.show();
                     }
                 } catch (IOException | SQLException ex) {

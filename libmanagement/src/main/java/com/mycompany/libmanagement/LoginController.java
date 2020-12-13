@@ -65,7 +65,7 @@ public class LoginController {
     public void backSceneHandler(ActionEvent evt) throws IOException{
         Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("managerlibmenu.fxml"));
+        loader.setLocation(getClass().getResource("usermenu.fxml"));
         Parent backParent = loader.load();
         Scene scene = new Scene(backParent);
         stage.setScene(scene);
