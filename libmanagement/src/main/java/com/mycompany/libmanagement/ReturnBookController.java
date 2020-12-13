@@ -26,72 +26,76 @@ import javafx.stage.Stage;
  * @author user
  */
 public class ReturnBookController {
+
     @FXML
     private TableView<Book> tbBook;
-    public void loadBooks(User u) throws SQLException{       
+
+    public void loadBooks(User u) throws SQLException {
         TableColumn clName = new TableColumn("Tên sách");
         clName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        
+
         TableColumn clPublisher = new TableColumn("Nhà xuất bản");
         clPublisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        
+
         TableColumn clAuthor = new TableColumn("Tác giả");
         clAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
-        
+
         TableColumn clCategory = new TableColumn("Thể loại");
         clCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        
+
         TableColumn clStartDate = new TableColumn("Ngày mượn");
         clStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        
+
         TableColumn clEndDate = new TableColumn("Ngày hết hạn");
         clEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-         
+
         TableColumn clAction = new TableColumn();
         clAction.setCellFactory(et -> {
             TableCell cell = new TableCell();
             Button btn = new Button("Hoàn trả");
             btn.setOnAction(evt -> {
-                
+
                 Button bt = (Button) evt.getSource();
                 TableCell c = (TableCell) bt.getParent();
                 Book b = (Book) c.getTableRow().getItem();
-                
-                
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Xác nhận trả sách ?");
-                alert.showAndWait().ifPresent(res -> {
-                    if (res == ButtonType.OK) {
-                        try {
-                            if (BookServices.returnBook(b.getBorrowId()))
-                            {
-                                this.loadData(u.getId());
-                                alert.setAlertType(Alert.AlertType.INFORMATION);
-                                alert.setContentText("Thành công");
-                                alert.show();
-                                Stage stage = (Stage) tbBook.getScene().getWindow(); 
-                                stage.close(); 
+
+                if (b != null) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setContentText("Xác nhận trả sách ?");
+                    alert.showAndWait().ifPresent(res -> {
+                        if (res == ButtonType.OK) {
+                            try {
+                                if (BookServices.returnBook(b.getBorrowId())) {
+                                    this.loadData(u.getId());
+                                    alert.setAlertType(Alert.AlertType.INFORMATION);
+                                    alert.setContentText("Thành công");
+                                    alert.show();
+                                    Stage stage = (Stage) tbBook.getScene().getWindow();
+                                    stage.close();
+                                } else {
+                                    alert.setContentText("Trả sách thất bại!!");
+                                    alert.show();
+                                }
+                            } catch (SQLException ex) {
+                                Logger.getLogger(ReturnBookController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        } catch (SQLException ex) {
-                            alert.setContentText("Trả sách thất bại!!");
-                            alert.show();
                         }
-                    }
-                });
-                
+                    });
+                }
             });
-            
+
             cell.setGraphic(btn);
             return cell;
+
         });
-        
-        tbBook.getColumns().addAll(clName,clPublisher
-                ,clAuthor,clCategory, clAction);
+
+        tbBook.getColumns().addAll(clName, clPublisher,
+                clAuthor, clCategory, clAction);
         tbBook.getItems().clear();
         tbBook.setItems(BookServices.getBookStillNotReturn(u.getId()));
     }
-    
-    private void loadData(int id) throws SQLException{
+
+    private void loadData(int id) throws SQLException {
         tbBook.getItems().clear();
         tbBook.setItems(BookServices.getBookStillNotReturn(id));
     }

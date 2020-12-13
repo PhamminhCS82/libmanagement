@@ -157,7 +157,7 @@ public class BookServices {
     
     public static boolean returnBook(String id){
         Connection conn = JdbcUtils.getConnection();
-        String sql = "UPDATE borrow SET returndate =? WHERE id = ?";
+        String sql = "UPDATE borrow SET returndate =? WHERE id =?";
         try { 
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setDate(1, new Date(System.currentTimeMillis()));

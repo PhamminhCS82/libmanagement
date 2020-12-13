@@ -116,5 +116,22 @@ public class UserServices {
         
         return kq > 0;
     }
+    
+    public static boolean userProfileUpdateById(User u){
+        Connection conn = JdbcUtils.getConnection();
+        String sql = "UPDATE users SET email =?, address =?, phone =? WHERE id =?";
+        try {
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, u.getEmail());
+            stm.setString(2, u.getAddress());
+            stm.setString(3, u.getPhoneNumber());
+            stm.setInt(4, u.getId());
+            stm.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
 }

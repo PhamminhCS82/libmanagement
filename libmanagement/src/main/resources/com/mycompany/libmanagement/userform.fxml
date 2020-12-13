@@ -35,7 +35,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="115.0" text="Lưu thông tin" GridPane.columnIndex="1" GridPane.rowIndex="10">
+            <Button mnemonicParsing="false" onAction="#updateUserProfileHandler" prefHeight="31.0" prefWidth="115.0" text="Lưu thông tin" GridPane.columnIndex="1" GridPane.rowIndex="10">
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor></Button>

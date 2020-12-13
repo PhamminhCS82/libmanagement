@@ -294,4 +294,10 @@ public class User {
         this.loginId = loginId;
         this.password = password;
     }
+    public User(int id, String email, String address, String phone){
+        this.id = id;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phone;
+    } 
 }
