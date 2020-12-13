@@ -64,7 +64,7 @@
          <children>
             <Label text="Tìm kiếm" />
             <TextField fx:id="txtKeyword" promptText="Nhập từ khóa" />
-            <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Tìm theo" />
+            <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Tên sách" />
          </children>
       </HBox>
    </top>

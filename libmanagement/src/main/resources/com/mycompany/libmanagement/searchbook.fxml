@@ -11,7 +11,7 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.SearchBookController">
    <children>
       <Label text="Tìm kiếm" />
-      <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Tìm theo" />
+      <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Tên sách" />
       <TextField fx:id="txtKeyword" promptText="Nhập nội dung tìm kiếm" />
       <TableView fx:id="tbBooks" prefHeight="200.0" prefWidth="200.0" />
       <Label text="Mô tả nội dung" />
