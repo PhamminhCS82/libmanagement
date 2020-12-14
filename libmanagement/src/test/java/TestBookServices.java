@@ -95,9 +95,20 @@ public class TestBookServices {
         }
     }
     @Test
-    public void testgetBookStillNotReturnByUserIdIsNotFound(){
+    public void testGetBookStillNotReturnByUserIdIsNotFound(){
         try {
             assertEquals(0,BookServices.getBookStillNotReturn(-10).size());
+        } catch (SQLException ex) {
+            Logger.getLogger(TestBookServices.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Test
+    public void testUpdateBookSuccessful(){
+        Book b = new Book("Chạy án", "Không rõ", "Tiểu thuyết kể về 1 tên tội phạm chạy án",
+                "Nhà xuất bản Trẻ", "Tiểu thuyết", "Khu E", "2016");
+        b.setId(10);
+        try {
+            assertTrue(BookServices.updateBook(b));
         } catch (SQLException ex) {
             Logger.getLogger(TestBookServices.class.getName()).log(Level.SEVERE, null, ex);
         }

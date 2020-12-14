@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: libmanage
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -33,7 +33,7 @@ CREATE TABLE `books` (
   `category` varchar(50) DEFAULT NULL,
   `dayadded` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,8 +63,8 @@ CREATE TABLE `borrow` (
   PRIMARY KEY (`id`),
   KEY `fk_users_id_idx` (`users_id`),
   KEY `fk_books_id_idx` (`books_id`),
-  CONSTRAINT `fk_books_id` FOREIGN KEY (`books_id`) REFERENCES `books` (`id`),
-  CONSTRAINT `fk_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `fk_books_id` FOREIGN KEY (`books_id`) REFERENCES `books` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,7 +74,7 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
-INSERT INTO `borrow` VALUES ('00cffd3c-da9a-4c99-bd15-6ef72606d8ba',3,9,'2020-12-10','2021-01-09',NULL),('03ad6ff5-b7ac-4937-8314-2fae6a5040d6',3,9,'2020-12-10','2021-01-09',NULL),('0bd95cdc-9c14-4124-aeab-6634606d30d4',1,10,'2020-12-11','2021-01-10',NULL),('44062dcc-69e2-4c4a-8f02-757658987cbf',3,8,'2020-12-10','2021-01-09',NULL),('6ef52f51-038c-497d-8ea8-465fd679798c',6,8,'2020-12-10','2021-01-09','2020-12-10'),('9547783b-a13c-44a2-bf69-a68ee51a2d8a',4,10,'2020-12-10','2021-01-09',NULL),('ac35bd62-8cd1-45d9-8d65-5468278cbbec',4,8,'2020-12-10','2021-01-09',NULL),('b337e7df-46dd-4bee-ba9a-14c39e8cf0a6',1,8,'2020-12-10','2021-01-09','2020-12-10'),('cabbce01-253e-4759-b11e-4b825c8e95af',3,10,'2020-12-10','2021-01-09',NULL),('e7054210-174c-4ea3-95ea-ad4246ad9e5d',3,11,'2020-12-10','2021-01-09','2020-12-11');
+INSERT INTO `borrow` VALUES ('154597b8-27bc-4384-931f-fcdd7d07b7f9',1,9,'2020-12-13','2021-01-12',NULL),('5c587b01-7d51-48b3-b77a-0026ae55777d',1,11,'2020-12-13','2021-01-12',NULL),('64a0fd94-6d61-474b-8585-764b1eab126c',1,10,'2020-12-13','2021-01-12',NULL),('6bc38ca0-3af2-4d5c-8bf1-78dab46340db',1,10,'2020-12-13','2021-01-12',NULL),('77d1b868-4ee7-47dd-a9f6-e867b8bef756',1,8,'2020-12-13','2021-01-12',NULL),('b337e7df-46dd-4bee-ba9a-14c39e8cf0a6',1,8,'2020-12-10','2021-01-09','2020-12-10');
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,20 +113,19 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userId` varchar(50) NOT NULL,
-  `surname` varchar(45) DEFAULT NULL,
-  `firstname` varchar(60) DEFAULT NULL,
-  `sex` varchar(60) DEFAULT NULL,
-  `dateofbirth` varchar(50) DEFAULT NULL,
-  `position` varchar(60) DEFAULT NULL,
-  `department` varchar(60) DEFAULT NULL,
-  `createddate` date DEFAULT NULL,
-  `expirieddate` date DEFAULT NULL,
+  `surname` varchar(45) NOT NULL,
+  `firstname` varchar(60) NOT NULL,
+  `sex` varchar(60) NOT NULL,
+  `dateofbirth` varchar(50) NOT NULL,
+  `position` varchar(60) NOT NULL,
+  `department` varchar(60) NOT NULL,
+  `createddate` date NOT NULL,
+  `expirieddate` date NOT NULL,
   `email` varchar(60) DEFAULT NULL,
   `address` varchar(60) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `borrow` tinyint DEFAULT NULL,
-  PRIMARY KEY (`id`,`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +134,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487',0),(3,'A','B','C','D','E','F','G','2020-11-11','2023-11-11','aaaaaa','ccccccc','ddddddddd',0),(4,'qfqwfqfq.d',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(5,'adadadq qeqweq.q','qweqwrqraf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(6,'qfqfqwfqf.a','asdqfqfqf','qfqfqwfqf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(7,'dasdfqwfqf.s','sdqfqwfqwf','dasdfqwfqf','wfqwfqwqwfqf',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(8,'fasfafasfa eqweqweqwe.e','eqweqdrasfaffasfas','fasfafasfa eqweqweqwe','dqwgaf','2020-11-29',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(9,'qdqwdqrqr.f','fafqwrfqdq','qdqwdqrqr','qwfqwfqwfqwdas','2005-12-07','qdqwfq','fqwfqwfqwf',NULL,NULL,NULL,NULL,NULL,0),(10,'dqwdqdasda.d','dadqwfqwfaf','dqwdqdasda','qdqwdqwdq','2002-12-16','dqqfqwfqw','qfqwfqwfqwfwq','2020-12-07','2023-12-07',NULL,NULL,NULL,0),(11,'dqwfqwgqwgq.q','qwdqwfqgqgas','dqwfqwgqwgq','afqwgfqgqwg','2016-12-15','qwdqgqgq','qwfqwfqwgf','2020-12-07','2023-12-07','fqfqwfwfqw','qwdqwdqdqwrf',NULL,0),(12,'qwqdqwdqdqwd.q','qgfqgqgasga','qwqdqwdqdqwd','fqwfqwfqwfqw','2007-12-05','dqwdq','fqwfqfqwf','2020-12-07','2023-12-07','ffqwfqfqfqfq','fqfqfqwfqffqfqwfqqwf','dqdqfqwqwfqw',0),(14,'adqwdqdq.d','dqdqwfqfqw','adqwdqdq','qgffqwgqwfq','2020-06-15','qwfqfqwf','fqwfqfq','2020-12-07','2023-12-07','fqfqwfqwfqw','fqfqwfq','fqwfqfqw',0),(15,'dasfqfq','dqdqdqd','dqwdqwdqwdqwd','qdqwdqwfqwf','dasda','sdadqdqd','dqwdqwdqd',NULL,NULL,'qdqwdqwdq','dqwdqdqwd',NULL,0),(16,'fqwfqfqwf.d','dqwdqwdqwf','fqwfqfqwf','qqwfqfqf','2013-12-04','sdqdqdf','qwfqwf','2020-12-07','2023-12-07','fqwfqwf','fqwfqwf','fqwfqwfq',0),(18,'qfqwfqfqf.d','dâfqf','qfqwfqfqf','fqwfqwfqwf','2020-04-05','fqwfqwfqwf','sffqwfqwf','2020-12-09','2023-12-09','fqwfs','qfqfqff','qfqwdeqqd',NULL),(19,'dqdsdqdqdqwd.a','afqfqqwd','dqdsdqdqdqwd','fqfqwfqwqwdqd','2000-12-19','dqdasdqw','qdqdqdqd','2020-12-09','2023-12-09','qừqwqwrqw','qừqweqweqwd','qưdqwdqwdq',NULL),(20,'dqdqdqd.đ','đầqừ','dqdqdqd','qdqqdqd','2000-12-06','dqwdqdq','qưdqdqwd','2020-12-09','2023-12-09','dqfqwfqwfq','qfqwfqwqwd','qưdqwdqwdqw',NULL),(21,'fqwfqwqff.d','dqwqwdqwd','fqwfqwqff','qdqwdqwd','1999-12-15','qwdqwdqw','dqwdqqw','2020-12-09','2023-12-09','fqwfqwfqw','fqwfqwfqw','qdqwdqwdqd',NULL),(22,'dqwdqwdqwdqw.đ','đáqrdqửqưdq','dqwdqwdqwdqw','qdqwdqwdqwd','2000-12-04','dqwdqdq','dqwdqwd','2020-12-09','2023-12-09','qưdqwdqwd','dqdqwdq','dqwdqwdq',NULL);
+INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487'),(10,'dqwdqdasda.d','dadqwfqwfaf','dqwdqdasda','qdqwdqwdq','2002-12-16','dqqfqwfqw','qfqwfqwfqwfwq','2020-12-07','2023-12-07',NULL,NULL,NULL),(11,'dqwfqwgqwgq.q','qwdqwfqgqgas','dqwfqwgqwgq','afqwgfqgqwg','2016-12-15','qwdqgqgq','qwfqwfqwgf','2020-12-07','2023-12-07','fqfqwfwfqw','qwdqwdqdqwrf',NULL),(14,'adqwdqdq.d','dqdqwfqfqw','adqwdqdq','qgffqwgqwfq','2020-06-15','qwfqfqwf','fqwfqfq','2020-12-07','2023-12-07','fqfqwfqwfqw','fqfqwfq','fqwfqfqw'),(16,'fqwfqfqwf.d','dqwdqwdqwf','fqwfqfqwf','qqwfqfqf','2013-12-04','sdqdqdf','qwfqwf','2020-12-07','2023-12-07','fqwfqwf','fqwfqwf','fqwfqwfq'),(18,'qfqwfqfqf.d','dâfqf','qfqwfqfqf','fqwfqwfqwf','2020-04-05','fqwfqwfqwf','sffqwfqwf','2020-12-09','2023-12-09','fqwfs','qfqfqff','qfqwdeqqd'),(19,'dqdsdqdqdqwd.a','afqfqqwd','dqdsdqdqdqwd','fqfqwfqwqwdqd','2000-12-19','dqdasdqw','qdqdqdqd','2020-12-09','2023-12-09','qừqwqwrqw','qừqweqweqwd',''),(20,'dqdqdqd.đ','đầqừ','dqdqdqd','qdqqdqd','2000-12-06','dqwdqdq','qưdqdqwd','2020-12-09','2023-12-09','','',''),(21,'fqwfqwqff.d','dqwqwdqwd','fqwfqwqff','qdqwdqwd','1999-12-15','qwdqwdqw','dqwdqqw','2020-12-09','2023-12-09','fqwfqwfqw','fqwfqwfqw','qdqwdqwdqd'),(22,'dqwdqwdqwdqw.đ','đáqrdqửqưdq','dqwdqwdqwdqw','qdqwdqwdqwd','2000-12-04','dqwdqdq','dqwdqwd','2020-12-09','2023-12-09','qưdqwdqwd','dqdqwdq','dqwdqwdq'),(23,'minh.pq','Pham Quang','Minh','Nam','2000-06-11','Sinh viên','Khoa CNTT','2020-12-13','2023-12-13','','',''),(24,'trang.ntm','Nguyễn    thị Mai','Trang','Nữ','1984-07-19','Giảng Viên','Khoa CNTT','2020-12-13','2023-12-13','','',''),(25,'trai.n','Nguyễn','Trãi','Nam','1999-12-20','Sinh Viên','Khoa Kinh Tế','2020-12-13','2023-12-13','','',''),(26,'thanh.pv','Phạm Văn','Thành','Nam','1999-12-14','Sinh Viên','Khoa Luật','2020-12-13','2023-12-13','abcdtahnh@gmail.com','112/3 Tân Sơn Gò Vấp','aaaaaaaaaaaa');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,4 +243,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-13 12:12:14
+-- Dump completed on 2020-12-14 17:55:08

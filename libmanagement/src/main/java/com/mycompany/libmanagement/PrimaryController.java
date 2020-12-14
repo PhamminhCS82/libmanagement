@@ -31,94 +31,152 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
-public class PrimaryController implements Initializable{
-    @FXML TextField txtName;
-    @FXML TableView<Book> tbBooks;
-    @FXML TextField txtAuthors;
-    @FXML TextArea txtDescribe;
-    @FXML TextField txtCategory;
-    @FXML TextField txtPublisher;
-    @FXML TextField txtPublishYear;
-    @FXML TextField txtLocation;
-    @FXML TextField txtKeyword;
-    @FXML ComboBox cbKeyword;
-    @FXML Label lbDate;
-    private void loadBooks(){
+public class PrimaryController implements Initializable {
+
+    @FXML
+    TextField txtName;
+    @FXML
+    TableView<Book> tbBooks;
+    @FXML
+    TextField txtAuthors;
+    @FXML
+    TextArea txtDescribe;
+    @FXML
+    TextField txtCategory;
+    @FXML
+    TextField txtPublisher;
+    @FXML
+    TextField txtPublishYear;
+    @FXML
+    TextField txtLocation;
+    @FXML
+    TextField txtKeyword;
+    @FXML
+    ComboBox cbKeyword;
+    @FXML
+    Label lbDate;
+
+    private void loadBooks() {
         TableColumn clId = new TableColumn("Mã sách");
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        
+
         TableColumn clName = new TableColumn("Tên sách");
         clName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        
+
         TableColumn clPublisher = new TableColumn("Nhà xuất bản");
         clPublisher.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        
+
         TableColumn clAuthor = new TableColumn("Tác giả");
         clAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
-        
+
         TableColumn clCategory = new TableColumn("Thể loại");
         clCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        
+
         TableColumn clYear = new TableColumn("Năm xuất bản");
         clYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-         
+
         TableColumn clAction = new TableColumn();
         clAction.setCellFactory(et -> {
             TableCell cell = new TableCell();
             Button btn = new Button("Xóa");
             btn.setOnAction(evt -> {
-                
+
                 Button bt = (Button) evt.getSource();
                 TableCell c = (TableCell) bt.getParent();
                 Book b = (Book) c.getTableRow().getItem();
-                
-                
+
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Bạn chắc chắn xóa? lịch sử mượn sách vẫn sẽ giữ lại");
+                alert.setContentText("Bạn chắc chắn xóa?");
                 alert.showAndWait().ifPresent(res -> {
                     if (res == ButtonType.OK) {
                         try {
-                            if (BookServices.deleteBook(b.getId()))
+                            if (BookServices.deleteBook(b.getId())) {
                                 this.loadData("", -1);
+                            }
                         } catch (SQLException ex) {
                             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 });
-                
+
             });
-            
+
             cell.setGraphic(btn);
             return cell;
         });
-        
-        tbBooks.getColumns().addAll(clId,clName,clPublisher
-                ,clAuthor,clCategory,clYear, clAction);
+
+        tbBooks.getColumns().addAll(clId, clName, clPublisher,
+                clAuthor, clCategory, clYear, clAction);
     }
-    
-    private void loadData(String kw, int indexCat) throws SQLException{
+
+    private void loadData(String kw, int indexCat) throws SQLException {
         tbBooks.getItems().clear();
         tbBooks.setItems(BookServices.getBooks(kw, indexCat));
     }
-    
+
     public void addBooksHandler(ActionEvent evt) {
-        Book q = new Book(txtName.getText(),txtAuthors.getText(),txtDescribe.getText()
-                ,txtPublisher.getText(),txtCategory.getText(),txtLocation.getText() ,(txtPublishYear.getText()));
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if (BookServices.addBook(q) == true) {
-            alert.setContentText("SUCCESSFUL");
-            try {
-                loadData("", -1);
-            } catch (SQLException ex) {
-                Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        Book b = tbBooks.getSelectionModel().getSelectedItem();
+        String nameBook = txtName.getText().trim();
+        String authors = txtAuthors.getText().trim();
+        String publisher = txtPublisher.getText().trim();
+        String category = txtCategory.getText().trim();
+        String yearPublish = txtPublishYear.getText().trim();
+        String location = txtLocation.getText().trim();
+        String describe = txtDescribe.getText().trim();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if (nameBook.isEmpty() || authors.isEmpty() || publisher.isEmpty() || category.isEmpty()) {
+            alert.setContentText("Không thể để trống tên sách, tác giả, nhà xuất bản, thể loại");
         } else {
-            alert.setContentText("FAILED");
+            Book q = new Book(nameBook.replaceAll("\\s+", " "), authors.replaceAll("\\s+", " "), describe.replaceAll("\\s+", " "),
+                    publisher.replaceAll("\\s+", " "), category.replaceAll("\\s+", " "), location.replaceAll("\\s+", " "), yearPublish.replaceAll("\\s+", " "));
+            if (BookServices.addBook(q)) {
+                alert.setContentText("SUCCESSFUL");
+                try {
+                    loadData("", -1);
+                } catch (SQLException ex) {
+                    Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                alert.setContentText("FAILED");
+            }
+
+            
         }
-        
         alert.show();
     }
-    
+
+    public void upadteBooksHandler(ActionEvent evt) throws SQLException {
+        if (!tbBooks.getSelectionModel().getSelectedCells().isEmpty()) {
+            Book b = tbBooks.getSelectionModel().getSelectedItem();
+            String nameBook = txtName.getText().trim();
+            String authors = txtAuthors.getText().trim();
+            String publisher = txtPublisher.getText().trim();
+            String category = txtCategory.getText().trim();
+            String yearPublish = txtPublishYear.getText().trim();
+            String location = txtLocation.getText().trim();
+            String describe = txtDescribe.getText().trim();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            if (nameBook.isEmpty() || authors.isEmpty() || publisher.isEmpty() || category.isEmpty()) {
+                alert.setContentText("Không thể để trống tên sách, tác giả, nhà xuất bản, thể loại");
+            } else {
+                b.setCategory(category.replaceAll("\\s+", " "));
+                b.setAuthor(authors.replaceAll("\\s+", " "));
+                b.setName(nameBook.replaceAll("\\s+", " "));
+                b.setPublisher(publisher.replaceAll("\\s+", " "));
+                b.setDescribe(describe.replaceAll("\\s+", " "));
+                b.setYear(yearPublish.replaceAll("\\s+", " "));
+                b.setLocation(location.replaceAll("\\s+", " "));
+                if (BookServices.updateBook(b)) {
+                    alert.setContentText("Thành công");
+                } else {
+                    alert.setContentText("Thất bại");
+                }
+                loadData("", -1);
+            }
+            alert.show();
+        }
+    }
+
     public void clearTextHandler(ActionEvent evt) {
         txtAuthors.clear();
         txtCategory.clear();
@@ -129,16 +187,16 @@ public class PrimaryController implements Initializable{
         txtPublisher.clear();
         lbDate.setText("");
     }
-    
-    public void backSceneHandler(ActionEvent evt) throws IOException{
-        Stage stage = (Stage)((Node) evt.getSource()).getScene().getWindow();
+
+    public void backSceneHandler(ActionEvent evt) throws IOException {
+        Stage stage = (Stage) ((Node) evt.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("managerlibmenu.fxml"));
         Parent backParent = loader.load();
         Scene scene = new Scene(backParent);
         stage.setScene(scene);
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         String[] list = {"Tên sách", "Tác giả", "Nhà xuất bản", "Thể loại", "Năm xuất bản"};
@@ -152,8 +210,8 @@ public class PrimaryController implements Initializable{
         }
         txtKeyword.textProperty().addListener(et -> {
             try {
-                loadData(txtKeyword.getText()
-                        , cbKeyword.getSelectionModel().getSelectedIndex());
+                loadData(txtKeyword.getText(),
+                        cbKeyword.getSelectionModel().getSelectedIndex());
             } catch (SQLException ex) {
                 Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -166,16 +224,18 @@ public class PrimaryController implements Initializable{
                 txtAuthors.setText(b.getAuthor());
                 txtCategory.setText(b.getCategory());
                 txtPublisher.setText(b.getPublisher());
-                if(b.getYear() != null)
+                if (b.getYear() != null) {
                     txtPublishYear.setText(b.getYear());
-                else
+                } else {
                     txtPublishYear.clear();
+                }
                 txtLocation.setText(b.getLocation());
                 txtDescribe.setText(b.getDescribe());
-                if(b.getDayAdded()!= null){
+                if (b.getDayAdded() != null) {
                     lbDate.setText(b.getDayAdded().toString());
-                }else
+                } else {
                     lbDate.setText("");
+                }
             });
             return row;
         });
@@ -187,8 +247,9 @@ public class PrimaryController implements Initializable{
                 alert.showAndWait().ifPresent(res -> {
                     if (res == ButtonType.OK) {
                         try {
-                            if (BookServices.deleteBook(index))
+                            if (BookServices.deleteBook(index)) {
                                 this.loadData("", -1);
+                            }
                         } catch (SQLException ex) {
                             Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -197,9 +258,9 @@ public class PrimaryController implements Initializable{
             }
         });
         txtPublishYear.textProperty().addListener((observable, oldValue, newValue) -> {
-        if (!newValue.matches("\\d*")) {
-            txtPublishYear.setText(newValue.replaceAll("[^\\d]", ""));
-        }
-    });
+            if (!newValue.matches("\\d*")) {
+                txtPublishYear.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 }

@@ -69,7 +69,7 @@ public class UserformController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         String email = txtEmail.getText().trim();
         String address = txtAddress.getText().trim();
-        if (email != null && StringUtils.emailPattern(email)) {
+        if (email.isEmpty() || StringUtils.emailPattern(email)) {
             User update = new User(id, email, address, txtPhoneNum.getText());
             if (UserServices.userProfileUpdateById(update)) {
                 alert.setContentText("Đã lưu");
