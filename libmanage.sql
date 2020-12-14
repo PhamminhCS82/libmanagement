@@ -30,10 +30,10 @@ CREATE TABLE `books` (
   `publisher` varchar(100) NOT NULL,
   `authors` varchar(100) NOT NULL,
   `location` varchar(45) DEFAULT NULL,
-  `category` varchar(50) DEFAULT NULL,
+  `category` varchar(50) NOT NULL,
   `dayadded` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (8,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-10-21'),(9,'Lập trình giao diện',NULL,'Tài liệu môn học lập trình giao diện','Đại học quốc gia TP.HCM','Nguyễn Thị Mai Trang','Khu A','Tài liệu',NULL),(10,'13 lý do tại sao',2007,'Tiểu thuyết dành cho người lớn được viết vào năm 2007 bới Jay Asher...','Razorbill','Jay Asher','Khu D','Tiểu thuyết',NULL),(11,'GIÁO TRÌNH NHỮNG NGUYÊN LÝ CƠ BẢN CỦA CHỦ NGHĨA MÁC - LÊNIN',2018,'Thực hiện các Nghị quyết của Đảng Cộng sản Việt Nam, nhất là Nghị quyết Trung ương 5 (khóa X) về công tác tư tưởng, lý luận và báo chí trước yêu cầu mới, ngày 18/9/2008, Bộ Giáo dục và Đào tạo đã ban hành Quyết định số 52/2008/QĐ-BGĐT ban hành Chương trình môn học Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin dành cho sinh viên khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh và phối hợp với Nhà xuất bản Chính trị quốc gia Sự thật xuất bản Giáo Trình Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin (Dành cho sinh viên đại học, cao đăng khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh)','Chính trị Quốc Gia Sự Thật','Bộ giáo dục và đào tạo','Khu C','Chính trị - Pháp luật',NULL),(14,'abc',2020,'fasavzxvxzgas','d','b','àasfa','c',NULL),(16,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-12-06');
+INSERT INTO `books` VALUES (8,'Cơ sở lập trình',2020,'Nhập môn lập trình cơ bản','Trường đại học Mở TP.HCM','Giảng viên khoa CNTT','Khu A','Tài liệu','2020-10-21'),(9,'Lập trình giao diện',NULL,'Tài liệu môn học lập trình giao diện','Đại học quốc gia TP.HCM','Nguyễn Thị Mai Trang','Khu A','Tài liệu',NULL),(10,'13 lý do tại sao',2007,'Tiểu thuyết dành cho người lớn được viết vào năm 2007 bới Jay Asher...','Razorbill','Jay Asher','Khu D','Tiểu thuyết',NULL),(11,'GIÁO TRÌNH NHỮNG NGUYÊN LÝ CƠ BẢN CỦA CHỦ NGHĨA MÁC - LÊNIN',2018,'Thực hiện các Nghị quyết của Đảng Cộng sản Việt Nam, nhất là Nghị quyết Trung ương 5 (khóa X) về công tác tư tưởng, lý luận và báo chí trước yêu cầu mới, ngày 18/9/2008, Bộ Giáo dục và Đào tạo đã ban hành Quyết định số 52/2008/QĐ-BGĐT ban hành Chương trình môn học Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin dành cho sinh viên khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh và phối hợp với Nhà xuất bản Chính trị quốc gia Sự thật xuất bản Giáo Trình Những Nguyên Lý Cơ Bản Của Chủ Nghĩa Mác - Lênin (Dành cho sinh viên đại học, cao đăng khối không chuyên ngành Mác - Lênin, tư tưởng Hồ Chí Minh)','Chính trị Quốc Gia Sự Thật','Bộ giáo dục và đào tạo','Khu C','Chính trị - Pháp luật',NULL),(14,'Chạy án',2012,'Tiểu thuyết chạy án nổi tiếng','Tuổi Trẻ','Không rõ','Khu D','Tiểu thuyết',NULL),(16,'Kỹ thuật lập trình',2020,'Lập trình cơ bản tiếp theo','Trường đại học Mở TP.HCM','Hồng Thái','Khu A','Tài liệu','2020-12-06'),(18,'Kỹ thuật lập trình',2020,'Lập trình cơ bản tiếp theo','Trường đại học Mở TP.HCM','Hồng Thái','Khu A','Tài liệu','2020-12-14'),(19,'Ứng dụng web',2020,'Lập trình ứng dụng web','Trường đại học Mở TP.HCM','Nguyễn Thị Mai Trang','Khu A','Tài liệu','2020-12-14');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
-INSERT INTO `borrow` VALUES ('154597b8-27bc-4384-931f-fcdd7d07b7f9',1,9,'2020-12-13','2021-01-12',NULL),('5c587b01-7d51-48b3-b77a-0026ae55777d',1,11,'2020-12-13','2021-01-12',NULL),('64a0fd94-6d61-474b-8585-764b1eab126c',1,10,'2020-12-13','2021-01-12',NULL),('6bc38ca0-3af2-4d5c-8bf1-78dab46340db',1,10,'2020-12-13','2021-01-12',NULL),('77d1b868-4ee7-47dd-a9f6-e867b8bef756',1,8,'2020-12-13','2021-01-12',NULL),('b337e7df-46dd-4bee-ba9a-14c39e8cf0a6',1,8,'2020-12-10','2021-01-09','2020-12-10');
+INSERT INTO `borrow` VALUES ('154597b8-27bc-4384-931f-fcdd7d07b7f9',1,9,'2020-12-13','2021-01-12',NULL),('5c587b01-7d51-48b3-b77a-0026ae55777d',1,11,'2020-12-13','2021-01-12',NULL),('64a0fd94-6d61-474b-8585-764b1eab126c',1,10,'2020-12-13','2021-01-12',NULL),('6bc38ca0-3af2-4d5c-8bf1-78dab46340db',1,10,'2020-12-13','2021-01-12',NULL),('77d1b868-4ee7-47dd-a9f6-e867b8bef756',1,8,'2020-12-13','2021-01-12',NULL),('b337e7df-46dd-4bee-ba9a-14c39e8cf0a6',1,8,'2020-12-10','2021-01-09','2021-12-10');
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `users` (
   `address` varchar(60) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487'),(10,'dqwdqdasda.d','dadqwfqwfaf','dqwdqdasda','qdqwdqwdq','2002-12-16','dqqfqwfqw','qfqwfqwfqwfwq','2020-12-07','2023-12-07',NULL,NULL,NULL),(11,'dqwfqwgqwgq.q','qwdqwfqgqgas','dqwfqwgqwgq','afqwgfqgqwg','2016-12-15','qwdqgqgq','qwfqwfqwgf','2020-12-07','2023-12-07','fqfqwfwfqw','qwdqwdqdqwrf',NULL),(14,'adqwdqdq.d','dqdqwfqfqw','adqwdqdq','qgffqwgqwfq','2020-06-15','qwfqfqwf','fqwfqfq','2020-12-07','2023-12-07','fqfqwfqwfqw','fqfqwfq','fqwfqfqw'),(16,'fqwfqfqwf.d','dqwdqwdqwf','fqwfqfqwf','qqwfqfqf','2013-12-04','sdqdqdf','qwfqwf','2020-12-07','2023-12-07','fqwfqwf','fqwfqwf','fqwfqwfq'),(18,'qfqwfqfqf.d','dâfqf','qfqwfqfqf','fqwfqwfqwf','2020-04-05','fqwfqwfqwf','sffqwfqwf','2020-12-09','2023-12-09','fqwfs','qfqfqff','qfqwdeqqd'),(19,'dqdsdqdqdqwd.a','afqfqqwd','dqdsdqdqdqwd','fqfqwfqwqwdqd','2000-12-19','dqdasdqw','qdqdqdqd','2020-12-09','2023-12-09','qừqwqwrqw','qừqweqweqwd',''),(20,'dqdqdqd.đ','đầqừ','dqdqdqd','qdqqdqd','2000-12-06','dqwdqdq','qưdqdqwd','2020-12-09','2023-12-09','','',''),(21,'fqwfqwqff.d','dqwqwdqwd','fqwfqwqff','qdqwdqwd','1999-12-15','qwdqwdqw','dqwdqqw','2020-12-09','2023-12-09','fqwfqwfqw','fqwfqwfqw','qdqwdqwdqd'),(22,'dqwdqwdqwdqw.đ','đáqrdqửqưdq','dqwdqwdqwdqw','qdqwdqwdqwd','2000-12-04','dqwdqdq','dqwdqwd','2020-12-09','2023-12-09','qưdqwdqwd','dqdqwdq','dqwdqwdq'),(23,'minh.pq','Pham Quang','Minh','Nam','2000-06-11','Sinh viên','Khoa CNTT','2020-12-13','2023-12-13','','',''),(24,'trang.ntm','Nguyễn    thị Mai','Trang','Nữ','1984-07-19','Giảng Viên','Khoa CNTT','2020-12-13','2023-12-13','','',''),(25,'trai.n','Nguyễn','Trãi','Nam','1999-12-20','Sinh Viên','Khoa Kinh Tế','2020-12-13','2023-12-13','','',''),(26,'thanh.pv','Phạm Văn','Thành','Nam','1999-12-14','Sinh Viên','Khoa Luật','2020-12-13','2023-12-13','abcdtahnh@gmail.com','112/3 Tân Sơn Gò Vấp','aaaaaaaaaaaa');
+INSERT INTO `users` VALUES (1,'minh.pq','Phạm Quang','Minh','Nam','2000-06-11','Sinh Viên','Khoa Công nghệ thông tin','2017-11-18','2020-12-31','pminh723@gmail.com','667/3 Tân Sơn, p12, quận Gò Vấp','388514487'),(10,'dqwdqdasda.d','dadqwfqwfaf','dqwdqdasda','qdqwdqwdq','2002-12-16','dqqfqwfqw','qfqwfqwfqwfwq','2020-12-07','2023-12-07',NULL,NULL,NULL),(11,'dqwfqwgqwgq.q','qwdqwfqgqgas','dqwfqwgqwgq','afqwgfqgqwg','2016-12-15','qwdqgqgq','qwfqwfqwgf','2020-12-07','2023-12-07','fqfqwfwfqw','qwdqwdqdqwrf',NULL),(14,'adqwdqdq.d','dqdqwfqfqw','adqwdqdq','qgffqwgqwfq','2020-06-15','qwfqfqwf','fqwfqfq','2020-12-07','2023-12-07','fqfqwfqwfqw','fqfqwfq','fqwfqfqw'),(16,'fqwfqfqwf.d','dqwdqwdqwf','fqwfqfqwf','qqwfqfqf','2013-12-04','sdqdqdf','qwfqwf','2020-12-07','2023-12-07','fqwfqwf','fqwfqwf','fqwfqwfq'),(18,'qfqwfqfqf.d','dâfqf','qfqwfqfqf','fqwfqwfqwf','2020-04-05','fqwfqwfqwf','sffqwfqwf','2020-12-09','2023-12-09','fqwfs','qfqfqff','qfqwdeqqd'),(19,'dqdsdqdqdqwd.a','afqfqqwd','dqdsdqdqdqwd','fqfqwfqwqwdqd','2000-12-19','dqdasdqw','qdqdqdqd','2020-12-09','2023-12-09','qừqwqwrqw','qừqweqweqwd',''),(20,'dqdqdqd.đ','đầqừ','dqdqdqd','qdqqdqd','2000-12-06','dqwdqdq','qưdqdqwd','2020-12-09','2023-12-09','','',''),(21,'fqwfqwqff.d','dqwqwdqwd','fqwfqwqff','qdqwdqwd','1999-12-15','qwdqwdqw','dqwdqqw','2020-12-09','2023-12-09','fqwfqwfqw','fqwfqwfqw','qdqwdqwdqd'),(22,'dqwdqwdqwdqw.đ','đáqrdqửqưdq','dqwdqwdqwdqw','qdqwdqwdqwd','2000-12-04','dqwdqdq','dqwdqwd','2020-12-09','2023-12-09','qưdqwdqwd','dqdqwdq','dqwdqwdq'),(23,'minh.pq','Pham Quang','Minh','Nam','2000-06-11','Sinh viên','Khoa CNTT','2020-12-13','2023-12-13','','',''),(24,'trang.ntm','Nguyễn    thị Mai','Trang','Nữ','1984-07-19','Giảng Viên','Khoa CNTT','2020-12-13','2023-12-13','','',''),(25,'trai.n','Nguyễn','Trãi','Nam','1999-12-20','Sinh Viên','Khoa Kinh Tế','2020-12-13','2023-12-13','','',''),(26,'thanh.pv','Phạm Văn','Thành','Nam','1999-12-14','Sinh Viên','Khoa Luật','2020-12-13','2023-12-13','abcdtahnh@gmail.com','112/3 Tân Sơn Gò Vấp','aaaaaaaaaaaa'),(27,'an.pth','Phạm Thị Hồng','Ân','Nữ','2000-10-04','Sinh Viên','Khoa CNTT','2020-12-14','2023-12-14','assdadqwdqd','',''),(28,'tien.n','Nguyễn','Tiến','Nam','2020-12-07','Sinh Viên','Khoa CNTT','2020-12-14','2023-12-14','','',''),(29,'quynh.nt','Nguyễn Thị','Quỳnh','Nữ','2020-12-07','Sinh Viên','Khoa CNTT','2020-12-14','2023-12-14','','',''),(30,'aaaaas.s','Sssssssa','Aaaaas','Nam','2020-12-11','SV','Khoa KTKT','2020-12-14','2023-12-14','','',''),(31,'aaasssss.a','Aaaaaa','Aaasssss','Nam','2002-12-11','SV','Khoa KTKT','2020-12-14','2023-12-14','','','');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,6 +168,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `countborrowbyyear` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `countborrowbyyear`(IN d int)
+BEGIN
+SELECT count(borrow.id) AS SLDH FROM borrow WHERE year(startdate) = d;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getfineneedtopay` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -183,27 +202,6 @@ BEGIN
 	SELECT datediff(returndate, enddate) * 5000
     FROM borrow
     where returndate is not null;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `new_procedure` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_procedure`()
-BEGIN
-	SELECT datediff(returndate, enddate) * 5000
-    FROM borrow
-    where enddate is not null;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -243,4 +241,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-14 17:55:08
+-- Dump completed on 2020-12-14 23:37:14

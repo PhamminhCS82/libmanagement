@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.libmanagement.FineTableController">
    <children>
+      <Button mnemonicParsing="false" onAction="#countBorrowHandler" text="Button" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="txtKeyword" promptText="Nhập năm" />
+            <ComboBox fx:id="cbKeyword" prefWidth="150.0" promptText="Cả năm" />
+         </children>
+      </HBox>
+      <Label fx:id="lbBorrow" text="Số sách đã mượn:" />
+      <Label fx:id="lbReturn" text="Số sách đã trả:" />
       <TableView fx:id="tbBorrow" prefHeight="395.0" prefWidth="600.0" />
       <Button mnemonicParsing="false" onAction="#backSceneHandler" text="Quay lại" />
    </children>

@@ -45,9 +45,9 @@ public class BookServices {
         ObservableList<Book> books = FXCollections.observableArrayList();
         while (rs.next()) {
             Book b = new Book(rs.getInt("id"), rs.getString("name"),
-                     rs.getString("authors"), rs.getString("describe"),
-                     rs.getString("publisher"), rs.getString("category"),
-                     rs.getString("location"), rs.getString("publish_year"), rs.getDate("dayadded"));
+                    rs.getString("authors"), rs.getString("describe"),
+                    rs.getString("publisher"), rs.getString("category"),
+                    rs.getString("location"), rs.getString("publish_year"), rs.getDate("dayadded"));
             books.add(b);
         }
         return books;
@@ -170,10 +170,98 @@ public class BookServices {
         ObservableList<Book> books = FXCollections.observableArrayList();
         while (rs.next()) {
             Book b = new Book(rs.getString("id"), rs.getString("name"), rs.getString("category"), rs.getString("authors"),
-                     rs.getString("publisher"), rs.getDate("startdate"), rs.getDate("enddate"));
+                    rs.getString("publisher"), rs.getDate("startdate"), rs.getDate("enddate"));
             books.add(b);
         }
         return books;
+    }
+    
+    public static int getCountOfYear(int year) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        int i = 0;
+        String sql = "call libmanage.countborrowbyyear(?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, year);
+        ResultSet rs = stm.executeQuery();
+        while (rs.next())
+           i = rs.getInt("SLDH");
+        return i;
+    }
+    
+    public static int getReturnCountOfYear(int year) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        int i = 0;
+        String sql = "SELECT count(borrow.id) AS SLDH FROM borrow WHERE year(startdate) =? AND returndate is not null";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, year);
+        ResultSet rs = stm.executeQuery();
+        while (rs.next())
+           i = rs.getInt("SLDH");
+        return i;
+    }
+    
+    public static int getCountOfYearAndMonth(int year, int idx) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        int i = 0;
+        String sql = "SELECT count(borrow.id) AS SLDH FROM borrow WHERE year(startdate) =? AND month(startdate) >? AND month(startdate) <=?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, year);
+        switch(idx){
+            case 0:
+                stm.setInt(2,0);
+                stm.setInt(3,3);
+                break;
+            case 1:
+                stm.setInt(2,3);
+                stm.setInt(3,6);
+                break;
+            case 2:
+                stm.setInt(2,6);
+                stm.setInt(3,9);
+                break;
+            case 3:
+                stm.setInt(2,9);
+                stm.setInt(3,12);
+                break;
+            default:
+                return i = 0;
+        }
+        ResultSet rs = stm.executeQuery();
+        while (rs.next())
+           i = rs.getInt("SLDH");
+        return i;
+    }
+    
+    public static int getReturnCountOfYearAndMonth(int year, int idx) throws SQLException{
+        Connection conn = JdbcUtils.getConnection();
+        int i = 0;
+        String sql = "SELECT count(borrow.id) AS SLDH FROM borrow WHERE year(startdate) =? AND month(startdate) >? AND month(startdate) <=? AND returndate is not null";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, year);
+        switch(idx){
+            case 0:
+                stm.setInt(2,0);
+                stm.setInt(3,3);
+                break;
+            case 1:
+                stm.setInt(2,3);
+                stm.setInt(3,6);
+                break;
+            case 2:
+                stm.setInt(2,6);
+                stm.setInt(3,9);
+                break;
+            case 3:
+                stm.setInt(2,9);
+                stm.setInt(3,12);
+                break;
+            default:
+                return i = 0;
+        }
+        ResultSet rs = stm.executeQuery();
+        while (rs.next())
+           i = rs.getInt("SLDH");
+        return i;
     }
 
     public static boolean returnBook(String id) {
@@ -204,7 +292,7 @@ public class BookServices {
                     fine = 0;
                 }
                 borrow.add(new BorrowDetails(rs.getString("books.name"), rs.getString("users.surname"), rs.getString("firstname"),
-                         rs.getDate("startdate"), rs.getDate("enddate"), rs.getDate("returndate"), fine));
+                        rs.getDate("startdate"), rs.getDate("enddate"), rs.getDate("returndate"), fine));
             }
         } catch (SQLException ex) {
             Logger.getLogger(BookServices.class.getName()).log(Level.SEVERE, null, ex);

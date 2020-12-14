@@ -3,9 +3,12 @@ package com.mycompany.libmanagement;
 import com.pqm.pojo.Book;
 import com.pqm.services.BookServices;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,7 +118,9 @@ public class PrimaryController implements Initializable {
     }
 
     public void addBooksHandler(ActionEvent evt) {
-        Book b = tbBooks.getSelectionModel().getSelectedItem();
+        Date date = new Date(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
         String nameBook = txtName.getText().trim();
         String authors = txtAuthors.getText().trim();
         String publisher = txtPublisher.getText().trim();
@@ -127,25 +132,32 @@ public class PrimaryController implements Initializable {
         if (nameBook.isEmpty() || authors.isEmpty() || publisher.isEmpty() || category.isEmpty()) {
             alert.setContentText("Không thể để trống tên sách, tác giả, nhà xuất bản, thể loại");
         } else {
-            Book q = new Book(nameBook.replaceAll("\\s+", " "), authors.replaceAll("\\s+", " "), describe.replaceAll("\\s+", " "),
-                    publisher.replaceAll("\\s+", " "), category.replaceAll("\\s+", " "), location.replaceAll("\\s+", " "), yearPublish.replaceAll("\\s+", " "));
-            if (BookServices.addBook(q)) {
-                alert.setContentText("SUCCESSFUL");
-                try {
-                    loadData("", -1);
-                } catch (SQLException ex) {
-                    Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if (parseInt(txtPublishYear.getText()) <= 0 || parseInt(txtPublishYear.getText()) > calendar.get(Calendar.YEAR)) {
+                alert.setContentText("Năm không hợp lệ");
             } else {
-                alert.setContentText("FAILED");
-            }
+                Book q = new Book(nameBook.replaceAll("\\s+", " "), authors.replaceAll("\\s+", " "), describe.replaceAll("\\s+", " "),
+                        publisher.replaceAll("\\s+", " "), category.replaceAll("\\s+", " "), location.replaceAll("\\s+", " "), yearPublish.replaceAll("\\s+", " "));
+                if (BookServices.addBook(q)) {
+                    alert.setContentText("SUCCESSFUL");
+                    try {
+                        loadData("", -1);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    alert.setContentText("FAILED");
+                }
 
-            
+            }
         }
         alert.show();
     }
 
     public void upadteBooksHandler(ActionEvent evt) throws SQLException {
+        Date date = new Date(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (!tbBooks.getSelectionModel().getSelectedCells().isEmpty()) {
             Book b = tbBooks.getSelectionModel().getSelectedItem();
             String nameBook = txtName.getText().trim();
@@ -155,9 +167,11 @@ public class PrimaryController implements Initializable {
             String yearPublish = txtPublishYear.getText().trim();
             String location = txtLocation.getText().trim();
             String describe = txtDescribe.getText().trim();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
             if (nameBook.isEmpty() || authors.isEmpty() || publisher.isEmpty() || category.isEmpty()) {
                 alert.setContentText("Không thể để trống tên sách, tác giả, nhà xuất bản, thể loại");
+            } else if ((parseInt(txtPublishYear.getText()) <= 0 || parseInt(txtPublishYear.getText()) > calendar.get(Calendar.YEAR))) {
+                alert.setContentText("Năm không hợp lệ");
             } else {
                 b.setCategory(category.replaceAll("\\s+", " "));
                 b.setAuthor(authors.replaceAll("\\s+", " "));
@@ -173,6 +187,9 @@ public class PrimaryController implements Initializable {
                 }
                 loadData("", -1);
             }
+            alert.show();
+        } else {
+            alert.setContentText("Chưa chọn sách để cập nhật");
             alert.show();
         }
     }
