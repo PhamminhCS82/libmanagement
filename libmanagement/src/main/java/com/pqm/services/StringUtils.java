@@ -64,5 +64,11 @@ public class StringUtils {
         }
         return sb.toString();
     }
+    
+    public static boolean emailPattern(String email){
+        String EMAIL_PATTERN = 
+            "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$";
+        return Pattern.matches(EMAIL_PATTERN, email);
+    }
 
 }

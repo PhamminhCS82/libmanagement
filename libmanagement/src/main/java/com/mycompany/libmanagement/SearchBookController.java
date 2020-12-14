@@ -7,6 +7,7 @@ package com.mycompany.libmanagement;
 
 import com.pqm.pojo.Book;
 import com.pqm.services.BookServices;
+import com.pqm.services.StringUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -110,5 +111,6 @@ public class SearchBookController implements Initializable{
             });
             return row;
         });
-    }  
+    }
+    
 }

@@ -6,6 +6,7 @@ package com.mycompany.libmanagement;
  * and open the template in the editor.
  */
 import com.pqm.pojo.User;
+import com.pqm.services.StringUtils;
 import com.pqm.services.UserServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,12 +67,20 @@ public class UserformController {
 
     public void updateUserProfileHandler(ActionEvent evt) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        User update = new User(id, txtEmail.getText(), txtAddress.getText(), txtPhoneNum.getText());
-        if (UserServices.userProfileUpdateById(update)) {
-            alert.setContentText("Đã lưu");
+        String email = txtEmail.getText().trim();
+        String address = txtAddress.getText().trim();
+        if (email != null && StringUtils.emailPattern(email)) {
+            User update = new User(id, email, address, txtPhoneNum.getText());
+            if (UserServices.userProfileUpdateById(update)) {
+                alert.setContentText("Đã lưu");
+            } else {
+                alert.setContentText("Thất bại");
+            }
             alert.show();
-        } else {
-            alert.setContentText("Thất bại");
+        }
+        else
+        {
+            alert.setContentText("Email nhập sai");
             alert.show();
         }
 

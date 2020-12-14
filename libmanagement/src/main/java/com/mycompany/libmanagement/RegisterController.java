@@ -50,22 +50,36 @@ public class RegisterController implements Initializable {
     public void addUserHandler(ActionEvent evt) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         String userId = " ";
-        if (txtSurname.getText() != null && txtFirstname.getText() != null && txtSex.getText() != null
-                && txtDateOfBirth.getValue() != null && txtPosition.getText() != null && txtDepartment.getText() != null) {
-            userId = StringUtils.createUserId(txtSurname.getText(), txtFirstname.getText());
-            User u = new User(StringUtils.removeAccent(userId), StringUtils.standardizedString(txtSurname.getText()), StringUtils.standardizedString(txtFirstname.getText()), txtSex.getText(),
-                    txtDateOfBirth.getValue().toString(), txtPosition.getText(), txtDepartment.getText(),
-                    txtEmail.getText(), txtAddress.getText(), txtPhoneNum.getText());
+        String surname = txtSurname.getText().trim();
+        String firstname = txtFirstname.getText().trim();
+        String sex = txtSex.getText().trim();
+        String position = txtPosition.getText().trim();
+        String department = txtDepartment.getText().trim();
+        String address = txtAddress.getText().trim();
+        String email = txtEmail.getText().trim();
+        if (surname != null && firstname != null && sex != null
+                && txtDateOfBirth.getValue() != null && position != null
+                && department != null) {
+            userId = StringUtils.createUserId(surname, firstname);
+            if (email != null && StringUtils.emailPattern(email)) {
+                User u = new User(StringUtils.removeAccent(userId), StringUtils.standardizedString(surname), StringUtils.standardizedString(firstname),
+                         sex.replaceAll("\\s+", " "), txtDateOfBirth.getValue().toString(), position.replaceAll("\\s+", " "),
+                         department.replaceAll("\\s+", " "), email, address.replaceAll("\\s+", " "), txtPhoneNum.getText());
 
-            if (UserServices.addUser(u) == true) {
-                alert.setContentText("SUCCESSFUL");
-                Stage stage = (Stage) txtAddress.getScene().getWindow();
-                stage.close();
-            } else {
-                alert.setContentText("FAILED");
+                if (UserServices.addUser(u) == true) {
+                    alert.setContentText("SUCCESSFUL");
+                    Stage stage = (Stage) txtAddress.getScene().getWindow();
+                    stage.close();
+                } else {
+                    alert.setContentText("FAILED");
+                }
+
+                alert.show();
+            }else{
+                alert.setContentText("Email sai định dạng");
+                alert.show();
             }
-
-            alert.show();
+                
         } else {
             alert.setContentText("Chưa nhập đủ thông tin bắt buộc!!!");
             alert.show();
